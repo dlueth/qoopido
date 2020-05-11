@@ -20,31 +20,37 @@ export default (options) => {
 		input: options.input,
 		output: [
 			{
-				file: 'dist/umd/index.js',
+				file: 'dist/index.js',
 				name: options.name,
 				format: 'umd',
 				sourcemap: true,
 				banner: banner,
 				plugins: [],
+                amd: {
+                    define: 'provide'
+                },
 				globals
 			},
 			{
-				file: 'dist/umd/index.min.js',
+				file: 'dist/index.min.js',
 				name: options.name,
 				format: 'umd',
 				sourcemap: true,
 				plugins: [ terser({ output: { preamble: banner } }) ],
+                amd: {
+                    define: 'provide'
+                },
 				globals
 			},
 			{
-				file: 'dist/es/index.js',
+				file: 'dist/esm/index.js',
 				format: 'es',
 				sourcemap: true,
 				banner: banner,
 				plugins: []
 			},
 			{
-				file: 'dist/es/index.min.js',
+				file: 'dist/esm/index.min.js',
 				format: 'es',
 				sourcemap: true,
 				plugins: [ terser({ output: { preamble: banner } }) ]
