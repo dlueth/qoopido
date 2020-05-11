@@ -24,7 +24,8 @@
         "lint:fix": "lerna run lint:fix",
         "test": "jest ./packages",
         "test:coverage": "yarn build && jest --collectCoverage  ./packages",
-        "build": "node script/build.js"
+        "build": "node script/build.js",
+        "publish": "lerna publish --canary --dist-tag prerelease --contents dist"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^11.1.0",
@@ -37,7 +38,7 @@
         "jest": "^26.0.1",
         "lerna": "^3.20.2",
         "prettier": "^2.0.5",
-        "rollup": "^2.8.2",
+        "rollup": "^2.9.1",
         "rollup-plugin-cleaner": "^1.0.0",
         "rollup-plugin-peer-deps-external": "^2.2.2",
         "rollup-plugin-serve": "^1.0.1",

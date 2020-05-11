@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/utility",
-    "version": "1.0.0",
+    "version": "0.0.0",
     "description": "Collection of frequently used utilities",
     "license": "MIT",
     "author": {
@@ -31,7 +31,7 @@
         "utility"
     ],
     "dependencies": {
-        "@qoopido/validator": "1.0.0"
+        "@qoopido/validator": "0.0.0"
     },
     "publishConfig": {
         "access": "public"

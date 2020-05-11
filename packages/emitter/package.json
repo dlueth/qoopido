@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/emitter",
-    "version": "1.0.0",
+    "version": "0.0.0",
     "description": "Ultra lightweight & flexible event emitter",
     "license": "MIT",
     "author": {
@@ -42,8 +42,8 @@
         "unsubscribe"
     ],
     "dependencies": {
-        "@qoopido/utility": "1.0.0",
-        "@qoopido/validator": "1.0.0"
+        "@qoopido/utility": "0.0.0",
+        "@qoopido/validator": "0.0.0"
     },
     "publishConfig": {
         "access": "public"
