@@ -1,5 +1,4 @@
-import Listener from "./class/listener";
-import Event from "./class/event";
+import { toArray } from "@qoopido/utility";
 import {
     isTypeof,
     isFunction,
@@ -8,6 +7,8 @@ import {
     isRegExp,
     isThenable,
 } from "@qoopido/validator";
+import Listener from "./class/listener";
+import Event from "./class/event";
 import { isIdentifier } from "./validator/index";
 
 var weakmap = new WeakMap();
@@ -242,7 +243,7 @@ Emitter.prototype = {
      * @returns {Emitter}
      */
     emit: function emit(name) {
-        var details = Array.prototype.slice.call(arguments, 1),
+        var details = toArray(arguments, 1),
             listener = retrieveListener.call(this, name);
 
         if (listener.length) {

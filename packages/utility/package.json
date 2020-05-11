@@ -1,7 +1,7 @@
 {
-    "name": "@qoopido/emitter",
+    "name": "@qoopido/utility",
     "version": "1.0.0",
-    "description": "Ultra lightweight & flexible event emitter",
+    "description": "Collection of frequently used utilities",
     "license": "MIT",
     "author": {
         "name": "Dirk Lueth",
@@ -28,21 +28,9 @@
         "build": "rollup -c ./config/rollup.js"
     },
     "keywords": [
-        "event emitter",
-        "eventemitter",
-        "event",
-        "events",
-        "emitter",
-        "emits",
-        "emit",
-        "pub/sub",
-        "pubsub",
-        "publish",
-        "subscribe",
-        "unsubscribe"
+        "utility"
     ],
     "dependencies": {
-        "@qoopido/utility": "1.0.0",
         "@qoopido/validator": "1.0.0"
     },
     "publishConfig": {

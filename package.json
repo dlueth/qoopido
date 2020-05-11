@@ -1,5 +1,5 @@
 {
-    "name": "qoopido",
+    "name": "root",
     "description": "Monorepo containing various @qoopido packages",
     "private": true,
     "license": "MIT",
@@ -19,7 +19,7 @@
         "packages/*"
     ],
     "scripts": {
-        "bootstrap": "yarn install && lerna bootstrap --hoist",
+        "bootstrap": "yarn install && lerna bootstrap",
         "lint": "lerna run lint",
         "lint:fix": "lerna run lint:fix",
         "test": "jest ./packages",
