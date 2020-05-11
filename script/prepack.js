@@ -10,7 +10,6 @@ locations.public.forEach((location) => {
     pkg.module = pkg.module.replace(/^dist\//, '');
 
     delete pkg.scripts;
-    delete pkg.publishConfig;
 
     fs.writeFileSync(location + '/dist/package.json', JSON.stringify(pkg, null, 4))
 });
