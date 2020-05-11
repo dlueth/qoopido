@@ -1,0 +1,50 @@
+{
+    "name": "@qoopido/emitter",
+    "version": "1.0.0",
+    "description": "Ultra lightweight & flexible event emitter",
+    "license": "MIT",
+    "author": {
+        "name": "Dirk Lueth",
+        "email": "info@qoopido.com"
+    },
+    "homepage": "https://github.com/dlueth/qoopido",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/dlueth/qoopido.git"
+    },
+    "bugs": {
+        "url": "https://github.com/dlueth/qoopido/issues"
+    },
+    "main": "dist/umd/index.js",
+    "module": "dist/es/index.js",
+    "files": [
+        "/dist"
+    ],
+    "scripts": {
+        "lint": "eslint ./src/",
+        "lint:fix": "eslint --fix ./src/",
+        "test":  "jest ./test",
+        "test:coverage": "yarn build && jest --collectCoverage  ./test",
+        "build": "rollup -c ./config/rollup.js"
+    },
+    "keywords": [
+        "event emitter",
+        "eventemitter",
+        "event",
+        "events",
+        "emitter",
+        "emits",
+        "emit",
+        "pub/sub",
+        "pubsub",
+        "publish",
+        "subscribe",
+        "unsubscribe"
+    ],
+    "dependencies": {
+        "@qoopido/validator": "1.0.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
