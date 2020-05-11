@@ -4,7 +4,7 @@ describe('isRegExp()', () => {
 	test('should return true for thenables', () => {
         function Thenable() {
             this.then = function() {};
-        };
+        }
 
         expect(isThenable(Promise.resolve())).toBe(true);
         expect(isThenable(new Thenable())).toBe(true);
