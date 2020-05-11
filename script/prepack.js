@@ -3,5 +3,6 @@
 const locations = require('../shared/locations.js');
 
 locations.public.forEach((location) => {
-    console.log('=>', location);
+    const pkg = require(location + '/package.json');
+    console.log('=>', location, pkg);
 });
