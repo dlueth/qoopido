@@ -17,9 +17,6 @@
     },
     "main": "dist/umd/index.js",
     "module": "dist/es/index.js",
-    "files": [
-        "/dist"
-    ],
     "scripts": {
         "lint": "eslint ./src/",
         "lint:fix": "eslint --fix ./src/",
