@@ -20,7 +20,7 @@
     "scripts": {
         "lint": "eslint ./src/",
         "lint:fix": "eslint --fix ./src/",
-        "test":  "jest ./test",
+        "test": "jest ./test",
         "test:coverage": "yarn build && jest --collectCoverage  ./test",
         "build": "rollup -c ./config/rollup.js"
     },

@@ -25,7 +25,8 @@
         "test": "jest ./packages",
         "test:coverage": "yarn build && jest --collectCoverage  ./packages",
         "build": "node script/build.js",
-        "publish": "lerna publish --canary --dist-tag prerelease --contents dist"
+        "publish": "lerna publish --canary --dist-tag prerelease --contents dist",
+        "prepublish": "cp ./packages/emitter/package.json ./packages/emitter/dist/package.json"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^11.1.0",
