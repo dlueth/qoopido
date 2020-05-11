@@ -7,13 +7,13 @@
  * @param {Boolean=} prepend
  * @param {Number=} limit
  */
-export default function Listener(storage, identifier, callback, prepend, limit) {
-	this.identifier = identifier;
-	this.callback = callback;
-	this.timestamp = !prepend
-		? +new Date()
-		: (storage.timestamp = storage.timestamp - 1);
-	this.remaining = limit;
+function Listener(storage, identifier, callback, prepend, limit) {
+    this.identifier = identifier;
+    this.callback = callback;
+    this.timestamp = !prepend
+        ? +new Date()
+        : (storage.timestamp = storage.timestamp - 1);
+    this.remaining = limit;
 }
 
 export default Listener;

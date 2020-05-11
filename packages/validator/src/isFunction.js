@@ -8,5 +8,5 @@ import isTypeof from "./isTypeof";
  * @returns {Boolean}
  */
 export default function isFunction(value) {
-	return isTypeof(value, "function");
+    return isTypeof(value, "function");
 }

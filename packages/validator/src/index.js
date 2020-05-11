@@ -7,11 +7,11 @@ import isRegExp from "./isRegExp";
 import isThenable from "./isThenable";
 
 export {
-	isTypeof,
-	isInstanceof,
-	isFunction,
-	isString,
-	isArray,
-	isRegExp,
-	isThenable,
+    isTypeof,
+    isInstanceof,
+    isFunction,
+    isString,
+    isArray,
+    isRegExp,
+    isThenable,
 };

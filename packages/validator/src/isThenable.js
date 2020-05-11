@@ -8,5 +8,5 @@ import isFunction from "./isFunction";
  * @returns {Boolean}
  */
 export default function isThenable(value) {
-	return value && isFunction(value.then);
+    return value && isFunction(value.then);
 }

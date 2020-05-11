@@ -7,5 +7,5 @@
  * @returns {Boolean}
  */
 export default function isTypeof(value, type) {
-	return typeof value === type;
+    return typeof value === type;
 }

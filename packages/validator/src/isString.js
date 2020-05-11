@@ -9,5 +9,5 @@ import isInstanceof from "./isInstanceof";
  * @returns {Boolean}
  */
 export default function isString(value) {
-	return isTypeof(value, "string") || isInstanceof(value, String);
+    return isTypeof(value, "string") || isInstanceof(value, String);
 }

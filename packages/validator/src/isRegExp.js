@@ -8,5 +8,5 @@ import isInstanceof from "./isInstanceof";
  * @returns {Boolean}
  */
 export default function isRegExp(value) {
-	return isInstanceof(value, RegExp);
+    return isInstanceof(value, RegExp);
 }

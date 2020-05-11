@@ -7,5 +7,5 @@
  * @returns {Boolean}
  */
 export default function isInstanceof(value, constructor) {
-	return value instanceof constructor;
+    return value instanceof constructor;
 }

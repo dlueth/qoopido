@@ -1,12 +1,12 @@
 import Listener from "./class/listener";
 import Event from "./class/event";
 import {
-	isTypeof,
-	isFunction,
-	isString,
-	isArray,
-	isRegExp,
-	isThenable,
+    isTypeof,
+    isFunction,
+    isString,
+    isArray,
+    isRegExp,
+    isThenable,
 } from "@qoopido/validator";
 import { isIdentifier } from "./validator/index";
 
@@ -22,13 +22,13 @@ var weakmap = new WeakMap();
  * @ignore
  */
 function initialize(context) {
-	weakmap.set(context, {
-		timestamp: +new Date(),
-		events: {},
-		expressions: [],
-	});
+    weakmap.set(context, {
+        timestamp: +new Date(),
+        events: {},
+        expressions: [],
+    });
 
-	return context;
+    return context;
 }
 
 /**
@@ -42,7 +42,7 @@ function initialize(context) {
  * @ignore
  */
 function filterRemoveEvent(listener) {
-	return listener.callback !== this;
+    return listener.callback !== this;
 }
 
 /**
@@ -57,11 +57,11 @@ function filterRemoveEvent(listener) {
  * @ignore
  */
 function filterRemoveExpression(listener) {
-	return !(
-		listener.identifier.toString() === this.identifier.toString() &&
-		(isTypeof(this.callback, "undefined") ||
-			listener.callback === this.callback)
-	);
+    return !(
+        listener.identifier.toString() === this.identifier.toString() &&
+        (isTypeof(this.callback, "undefined") ||
+            listener.callback === this.callback)
+    );
 }
 
 /**
@@ -77,7 +77,7 @@ function filterRemoveExpression(listener) {
  * @ignore
  */
 function sortListener(a, b) {
-	return a.timestamp - b.timestamp;
+    return a.timestamp - b.timestamp;
 }
 
 /**
@@ -91,7 +91,7 @@ function sortListener(a, b) {
  * @ignore
  */
 function mapListener(listener) {
-	return listener.callback;
+    return listener.callback;
 }
 
 /**
@@ -104,23 +104,23 @@ function mapListener(listener) {
  * @ignore
  */
 function applyEvent(listener, event, details) {
-	var self = this;
+    var self = this;
 
-	listener.reduce(function (previous, next) {
-		if (!event.isCanceled) {
-			if (next.remaining && !(next.remaining -= 1)) {
-				self.off(next.identifier, next.callback);
-			}
+    listener.reduce(function (previous, next) {
+        if (!event.isCanceled) {
+            if (next.remaining && !(next.remaining -= 1)) {
+                self.off(next.identifier, next.callback);
+            }
 
-			if (isThenable(previous)) {
-				return previous.then(function () {
-					return next.callback.apply(this, [event].concat(details));
-				});
-			}
+            if (isThenable(previous)) {
+                return previous.then(function () {
+                    return next.callback.apply(this, [event].concat(details));
+                });
+            }
 
-			return next.callback.apply(this, [event].concat(details));
-		}
-	}, true);
+            return next.callback.apply(this, [event].concat(details));
+        }
+    }, true);
 }
 
 /**
@@ -134,9 +134,9 @@ function applyEvent(listener, event, details) {
  * @ignore
  */
 function subscribeEvent(name, callback, prepend, limit) {
-	(this.events[name] = this.events[name] || []).push(
-		new Listener(this, name, callback, prepend, limit)
-	);
+    (this.events[name] = this.events[name] || []).push(
+        new Listener(this, name, callback, prepend, limit)
+    );
 }
 
 /**
@@ -148,18 +148,18 @@ function subscribeEvent(name, callback, prepend, limit) {
  * @ignore
  */
 function unsubscribeEvent(name, callback) {
-	if (!this.events[name]) {
-		return;
-	}
+    if (!this.events[name]) {
+        return;
+    }
 
-	if (callback) {
-		this.events[name] = this.events[name].filter(
-			filterRemoveEvent,
-			callback
-		);
-	} else {
-		this.events[name].length = 0;
-	}
+    if (callback) {
+        this.events[name] = this.events[name].filter(
+            filterRemoveEvent,
+            callback
+        );
+    } else {
+        this.events[name].length = 0;
+    }
 }
 
 /**
@@ -173,9 +173,9 @@ function unsubscribeEvent(name, callback) {
  * @ignore
  */
 function subscribeExpression(expression, callback, prepend, limit) {
-	this.expressions.push(
-		new Listener(this, expression, callback, prepend, limit)
-	);
+    this.expressions.push(
+        new Listener(this, expression, callback, prepend, limit)
+    );
 }
 
 /**
@@ -187,10 +187,10 @@ function subscribeExpression(expression, callback, prepend, limit) {
  * @ignore
  */
 function unsubscribeExpression(expression, callback) {
-	this.expressions = this.expressions.filter(filterRemoveExpression, {
-		identifier: expression,
-		callback: callback,
-	});
+    this.expressions = this.expressions.filter(filterRemoveExpression, {
+        identifier: expression,
+        callback: callback,
+    });
 }
 
 /**
@@ -203,118 +203,118 @@ function unsubscribeExpression(expression, callback) {
  * @ignore
  */
 function retrieveListener(name) {
-	var listener, storage;
+    var listener, storage;
 
-	if (isString(name)) {
-		storage = weakmap.get(this);
-		listener = storage.events[name] ? storage.events[name].slice() : [];
+    if (isString(name)) {
+        storage = weakmap.get(this);
+        listener = storage.events[name] ? storage.events[name].slice() : [];
 
-		if (this !== Emitter) {
-			listener = listener.concat(retrieveListener.call(Emitter, name));
-		}
+        if (this !== Emitter) {
+            listener = listener.concat(retrieveListener.call(Emitter, name));
+        }
 
-		storage.expressions.forEach((expression) => {
-			if (expression.identifier.test(name)) {
-				listener.push(expression);
-			}
-		});
+        storage.expressions.forEach((expression) => {
+            if (expression.identifier.test(name)) {
+                listener.push(expression);
+            }
+        });
 
-		listener.sort(sortListener);
-	}
+        listener.sort(sortListener);
+    }
 
-	return listener || [];
+    return listener || [];
 }
 
 /**
  * Class Emitter
  */
 function Emitter() {
-	initialize(this);
+    initialize(this);
 }
 
 Emitter.prototype = {
-	/**
-	 * Emit an event
-	 *
-	 * @param {String} name
-	 * @param {...*} details
-	 *
-	 * @returns {Emitter}
-	 */
-	emit: function emit(name) {
-		var details = Array.prototype.slice.call(arguments, 1),
-			listener = retrieveListener.call(this, name);
+    /**
+     * Emit an event
+     *
+     * @param {String} name
+     * @param {...*} details
+     *
+     * @returns {Emitter}
+     */
+    emit: function emit(name) {
+        var details = Array.prototype.slice.call(arguments, 1),
+            listener = retrieveListener.call(this, name);
 
-		if (listener.length) {
-			applyEvent.call(this, listener, new Event(name, this), details);
-		}
+        if (listener.length) {
+            applyEvent.call(this, listener, new Event(name, this), details);
+        }
 
-		return this;
-	},
+        return this;
+    },
 
-	/**
-	 * Subscribe an event listener
-	 *
-	 * @param {String|RegExp|(String|RegExp)[]} identifier
-	 * @param {Function} callback
-	 * @param {Boolean=} prepend
-	 * @param {Number=} limit
-	 *
-	 * @returns {Emitter}
-	 */
-	on: function on(identifier, callback, prepend, limit) {
-		return Emitter.on.call(this, identifier, callback, prepend, limit);
-	},
+    /**
+     * Subscribe an event listener
+     *
+     * @param {String|RegExp|(String|RegExp)[]} identifier
+     * @param {Function} callback
+     * @param {Boolean=} prepend
+     * @param {Number=} limit
+     *
+     * @returns {Emitter}
+     */
+    on: function on(identifier, callback, prepend, limit) {
+        return Emitter.on.call(this, identifier, callback, prepend, limit);
+    },
 
-	/**
-	 * Subscribe a once only event listener
-	 *
-	 * @param {String|RegExp|(String|RegExp)[]} identifier
-	 * @param {Function} callback
-	 * @param {Boolean=} prepend
-	 *
-	 * @returns {Emitter}
-	 */
-	once: function once(identifier, callback, prepend) {
-		return Emitter.once.call(this, identifier, callback, prepend);
-	},
+    /**
+     * Subscribe a once only event listener
+     *
+     * @param {String|RegExp|(String|RegExp)[]} identifier
+     * @param {Function} callback
+     * @param {Boolean=} prepend
+     *
+     * @returns {Emitter}
+     */
+    once: function once(identifier, callback, prepend) {
+        return Emitter.once.call(this, identifier, callback, prepend);
+    },
 
-	/**
-	 * Subscribe a limited event listener
-	 *
-	 * @param {String|RegExp|(String|RegExp)[]} identifier
-	 * @param {Number} limit
-	 * @param {Function} callback
-	 * @param {Boolean=} prepend
-	 *
-	 * @returns {Emitter}
-	 */
-	limit: function limit(identifier, limit, callback, prepend) {
-		return Emitter.limit.call(this, identifier, limit, callback, prepend);
-	},
+    /**
+     * Subscribe a limited event listener
+     *
+     * @param {String|RegExp|(String|RegExp)[]} identifier
+     * @param {Number} limit
+     * @param {Function} callback
+     * @param {Boolean=} prepend
+     *
+     * @returns {Emitter}
+     */
+    limit: function limit(identifier, limit, callback, prepend) {
+        return Emitter.limit.call(this, identifier, limit, callback, prepend);
+    },
 
-	/**
-	 * Unsubscribe an event listener
-	 *
-	 * @param {String|RegExp|(String|RegExp)[]} identifier
-	 * @param {Function=} callback
-	 *
-	 * @returns {Emitter}
-	 */
-	off: function off(identifier, callback) {
-		return Emitter.off.call(this, identifier, callback);
-	},
+    /**
+     * Unsubscribe an event listener
+     *
+     * @param {String|RegExp|(String|RegExp)[]} identifier
+     * @param {Function=} callback
+     *
+     * @returns {Emitter}
+     */
+    off: function off(identifier, callback) {
+        return Emitter.off.call(this, identifier, callback);
+    },
 
-	/**
-	 * Retrieve all listeners for a certain event
-	 *
-	 * @param {String} name
-	 *
-	 * @returns {Listener[]}
-	 */
-	listener: function listener(name) {
-		return Emitter.listener.call(this, name);
-	},
+    /**
+     * Retrieve all listeners for a certain event
+     *
+     * @param {String} name
+     *
+     * @returns {Listener[]}
+     */
+    listener: function listener(name) {
+        return Emitter.listener.call(this, name);
+    },
 };
 
 /**
@@ -330,31 +330,31 @@ Emitter.prototype = {
  * @static
  */
 Emitter.on = function on(identifier, callback, prepend, limit) {
-	if (isIdentifier(identifier) && isFunction(callback)) {
-		var storage = weakmap.get(this);
+    if (isIdentifier(identifier) && isFunction(callback)) {
+        var storage = weakmap.get(this);
 
-		if (isString(identifier)) {
-			subscribeEvent.call(storage, identifier, callback, prepend, limit);
-		}
+        if (isString(identifier)) {
+            subscribeEvent.call(storage, identifier, callback, prepend, limit);
+        }
 
-		if (isRegExp(identifier)) {
-			subscribeExpression.call(
-				storage,
-				identifier,
-				callback,
-				prepend,
-				limit
-			);
-		}
+        if (isRegExp(identifier)) {
+            subscribeExpression.call(
+                storage,
+                identifier,
+                callback,
+                prepend,
+                limit
+            );
+        }
 
-		if (isArray(identifier)) {
-			identifier.forEach((identifier) => {
-				this.on(identifier, callback, prepend, limit);
-			});
-		}
-	}
+        if (isArray(identifier)) {
+            identifier.forEach((identifier) => {
+                this.on(identifier, callback, prepend, limit);
+            });
+        }
+    }
 
-	return this;
+    return this;
 };
 
 /**
@@ -369,7 +369,7 @@ Emitter.on = function on(identifier, callback, prepend, limit) {
  * @static
  */
 Emitter.once = function once(identifier, callback, prepend) {
-	return this.on(identifier, callback, prepend, 1);
+    return this.on(identifier, callback, prepend, 1);
 };
 
 /**
@@ -385,7 +385,7 @@ Emitter.once = function once(identifier, callback, prepend) {
  * @static
  */
 Emitter.limit = function limit(identifier, limit, callback, prepend) {
-	return this.on(identifier, callback, prepend, limit);
+    return this.on(identifier, callback, prepend, limit);
 };
 
 /**
@@ -399,28 +399,28 @@ Emitter.limit = function limit(identifier, limit, callback, prepend) {
  * @static
  */
 Emitter.off = function off(identifier, callback) {
-	if (
-		isIdentifier(identifier) &&
-		(isFunction(callback) || isTypeof(callback, "undefined"))
-	) {
-		var storage = weakmap.get(this);
+    if (
+        isIdentifier(identifier) &&
+        (isFunction(callback) || isTypeof(callback, "undefined"))
+    ) {
+        var storage = weakmap.get(this);
 
-		if (isString(identifier)) {
-			unsubscribeEvent.call(storage, identifier, callback);
-		}
+        if (isString(identifier)) {
+            unsubscribeEvent.call(storage, identifier, callback);
+        }
 
-		if (isRegExp(identifier)) {
-			unsubscribeExpression.call(storage, identifier, callback);
-		}
+        if (isRegExp(identifier)) {
+            unsubscribeExpression.call(storage, identifier, callback);
+        }
 
-		if (isArray(identifier)) {
-			identifier.forEach((identifier) => {
-				this.off(identifier, callback);
-			});
-		}
-	}
+        if (isArray(identifier)) {
+            identifier.forEach((identifier) => {
+                this.off(identifier, callback);
+            });
+        }
+    }
 
-	return this;
+    return this;
 };
 
 /**
@@ -433,7 +433,7 @@ Emitter.off = function off(identifier, callback) {
  * @static
  */
 Emitter.listener = function listener(name) {
-	return retrieveListener.call(this, name).map(mapListener);
+    return retrieveListener.call(this, name).map(mapListener);
 };
 
 export default initialize(Emitter);
