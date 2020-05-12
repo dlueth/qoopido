@@ -1,4 +1,4 @@
-const { isFunction } = require('../dist/index');
+const isFunction = require('../dist/isFunction');
 
 describe('isFunction()', () => {
 	test('should return true for functions', () => {

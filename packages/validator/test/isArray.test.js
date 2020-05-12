@@ -1,4 +1,4 @@
-const { isArray } = require('../dist/index');
+const isArray= require('../dist/isArray');
 
 describe('isArray()', () => {
 	test('should return true for arrays', () => {

@@ -1,4 +1,4 @@
-const { isObject } = require('../dist/index');
+const isObject = require('../dist/isObject');
 
 describe('isObject()', () => {
 	test('should return true for any kind of object', () => {

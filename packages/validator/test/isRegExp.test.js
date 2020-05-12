@@ -1,4 +1,4 @@
-const { isRegExp } = require('../dist/index');
+const isRegExp = require('../dist/isRegExp');
 
 describe('isRegExp()', () => {
 	test('should return true for RegExps', () => {

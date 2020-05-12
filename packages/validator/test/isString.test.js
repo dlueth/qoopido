@@ -1,4 +1,4 @@
-const { isString } = require('../dist/index');
+const isString = require('../dist/isString');
 
 describe('isString()', () => {
 	test('should return true for strings', () => {

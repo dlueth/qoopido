@@ -1,4 +1,4 @@
-const { isInstanceof } = require('../dist/index');
+const isInstanceof = require('../dist/isInstanceof');
 
 describe('isIntanceof()', () => {
 	test('should return true if matching', () => {

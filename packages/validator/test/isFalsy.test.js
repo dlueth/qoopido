@@ -1,4 +1,4 @@
-const { isFalsy } = require('../dist/index');
+const isFalsy = require('../dist/isFalsy');
 
 describe('isFalsy()', () => {
 	test('should return true for falsy values', () => {

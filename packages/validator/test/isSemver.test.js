@@ -1,4 +1,4 @@
-const { isSemver } = require('../dist/index');
+const isSemver = require('../dist/isSemver');
 
 describe('isSemver()', () => {
 	test('should return true for valid semver versions', () => {
