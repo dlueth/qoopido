@@ -1,4 +1,4 @@
-# @Qoopido
+# @qoopido
 
 [![Coveralls](https://img.shields.io/coveralls/dlueth/qoopido.svg?style=flat-square)](https://coveralls.io/github/dlueth/qoopido)
 [![David](https://img.shields.io/david/dlueth/qoopido.svg?style=flat-square)](https://github.com/dlueth/qoopido)
