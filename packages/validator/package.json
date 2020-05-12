@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/validator",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Collection of frequently used validators",
     "license": "MIT",
     "author": {
@@ -20,7 +20,7 @@
     "scripts": {
         "lint": "eslint ./src/",
         "lint:fix": "eslint --fix ./src/",
-        "test": "jest ./test",
+        "test": "yarn build && jest ./test",
         "test:coverage": "yarn build && jest --collectCoverage  ./test",
         "build": "rollup -c ./config/rollup.js"
     },

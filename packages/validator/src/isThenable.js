@@ -1,3 +1,4 @@
+import isFalsy from "./isFalsy";
 import isFunction from "./isFunction";
 
 /**
@@ -8,5 +9,5 @@ import isFunction from "./isFunction";
  * @returns {Boolean}
  */
 export default function isThenable(value) {
-    return value && isFunction(value.then);
+    return !isFalsy(value) && isFunction(value.then);
 }

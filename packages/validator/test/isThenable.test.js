@@ -11,6 +11,9 @@ describe('isRegExp()', () => {
 	});
 
     test('should return false for non-thenables', () => {
+        expect(isThenable()).toBe(false);
         expect(isThenable({})).toBe(false);
+        expect(isThenable('string')).toBe(false);
+        expect(isThenable(Number.NaN)).toBe(false);
     });
 });
