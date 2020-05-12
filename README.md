@@ -1,6 +1,7 @@
 # @qoopido
 
-[![Coveralls](https://img.shields.io/coveralls/dlueth/qoopido.svg?style=flat-square)](https://coveralls.io/github/dlueth/qoopido)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dlueth/qoopido/Tests?label=Tests&style=flat-square)](https://github.com/dlueth/qoopido/actions?query=workflow%3ATests)
+[![Coveralls Coverage](https://img.shields.io/coveralls/dlueth/qoopido.svg?style=flat-square)](https://coveralls.io/github/dlueth/qoopido)
 ![David](https://img.shields.io/david/dlueth/qoopido.svg?style=flat-square)
 ![License](https://img.shields.io/github/license/dlueth/qoopido.svg?style=flat-square)
 
