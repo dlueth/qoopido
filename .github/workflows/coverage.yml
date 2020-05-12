@@ -28,7 +28,7 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Test
-      run: yarn run test:coverage
+      run: yarn run test:ci
         
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.1.1
