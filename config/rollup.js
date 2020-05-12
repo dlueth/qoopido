@@ -1,11 +1,27 @@
+import rimraf from 'rimraf';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import cleaner from 'rollup-plugin-cleaner';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
 import { homepage } from '../package.json';
 
-const packages = require('../../../shared/packages.js');
+const packages    = require('../../../shared/packages.js');
+const matchSuffix = /\.(\w+)$/;
+const matchIndex = /\/index$/;
+const paths       = {
+    'umd': 'dist',
+    'es':  'dist/esm'
+};
+
+rimraf.sync('./dist/*');
+
+function getFile(input, format, minified) {
+    return paths[format] + input.substr(input.indexOf('/')).replace(matchSuffix, minified ? '.min.$1' : '.$1');
+}
+
+function getName(name, input) {
+    return name + input.substr(input.indexOf('/')).replace(matchSuffix, '').replace(matchIndex, '');
+}
 
 export default (options) => {
 	const banner   = `/**! ${options.name} ${options.version} | ${homepage} | (c) ${(new Date).getFullYear()} ${options.author.name || options.author} */`;
@@ -20,37 +36,37 @@ export default (options) => {
 		input: options.input,
 		output: [
 			{
-				file: 'dist/index.js',
-				name: options.name,
+				file: getFile(options.input, 'umd'),
+				name: getName(options.name, options.input),
 				format: 'umd',
 				sourcemap: true,
 				banner: banner,
 				plugins: [],
                 amd: {
-                    define: 'provide'
+                    define: '(provide || define)'
                 },
 				globals
 			},
 			{
-				file: 'dist/index.min.js',
-				name: options.name,
+				file: getFile(options.input, 'umd', true),
+				name: getName(options.name, options.input),
 				format: 'umd',
 				sourcemap: true,
 				plugins: [ terser({ output: { preamble: banner } }) ],
                 amd: {
-                    define: 'provide'
+                    define: '(provide || define)'
                 },
 				globals
 			},
 			{
-				file: 'dist/esm/index.js',
+				file: getFile(options.input, 'es'),
 				format: 'es',
 				sourcemap: true,
 				banner: banner,
 				plugins: []
 			},
 			{
-				file: 'dist/esm/index.min.js',
+				file: getFile(options.input, 'es', true),
 				format: 'es',
 				sourcemap: true,
 				plugins: [ terser({ output: { preamble: banner } }) ]
@@ -59,11 +75,8 @@ export default (options) => {
 		external,
 		plugins: [
 			peerDepsExternal(),
-			cleaner({ targets: [ './dist/' ] }),
 			resolve(),
 			commonjs(),
-			// resolve({ extensions: [ '.js' ], browser: true }),
-			// commonjs({ include: '../../node_modules/**' })
 		]
 	};
 }
