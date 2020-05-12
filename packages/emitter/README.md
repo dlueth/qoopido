@@ -1,8 +1,8 @@
 # @qoopido/emitter
 
-[![NPM version](https://img.shields.io/npm/v/@qoopido/emitter.svg?style=flat-square)](https://www.npmjs.com/package/@qoopido/emitter)
-[![NPM downloads](https://img.shields.io/npm/dm/@qoopido/emitter.svg?style=flat-square)](https://www.npmjs.org/package/@qoopido/emitter)
-[![NPM downloads](https://img.shields.io/npm/dt/@qoopido/emitter.svg?style=flat-square)](https://www.npmjs.org/package/@qoopido/emitter)
+[![NPM version](https://img.shields.io/npm/v/@qoopido/emitter.svg?label=version&style=flat-square)](https://www.npmjs.com/package/@qoopido/emitter)
+![NPM downloads](https://img.shields.io/npm/dm/@qoopido/emitter.svg?label=npm&style=flat-square)
+![jsDelivr (npm)](https://img.shields.io/jsdelivr/npm/hm/@qoopido/emitter?label=jsdelivr&style=flat-square)
 
 
 Flexible & dead simple event emitter for Node.js supporting RegExp-based event subscription and global broadcast listeners.

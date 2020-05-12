@@ -1,8 +1,8 @@
 # @qoopido/validator
 
-[![NPM version](https://img.shields.io/npm/v/@qoopido/validator.svg?style=flat-square)](https://www.npmjs.com/package/@qoopido/validator)
-[![NPM downloads](https://img.shields.io/npm/dm/@qoopido/validator.svg?style=flat-square)](https://www.npmjs.org/package/@qoopido/validator)
-[![NPM downloads](https://img.shields.io/npm/dt/@qoopido/validator.svg?style=flat-square)](https://www.npmjs.org/package/@qoopido/validator)
+[![NPM version](https://img.shields.io/npm/v/@qoopido/validator.svg?label=version&style=flat-square)](https://www.npmjs.com/package/@qoopido/validator)
+![NPM downloads](https://img.shields.io/npm/dm/@qoopido/validator.svg?label=npm&style=flat-square)
+![jsDelivr (npm)](https://img.shields.io/jsdelivr/npm/hm/@qoopido/validator?label=jsdelivr&style=flat-square)
 
 Package providing frequently used validator-functions.
 
