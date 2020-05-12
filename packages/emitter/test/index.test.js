@@ -1,4 +1,4 @@
-const Emitter = require('../dist/umd/index');
+const Emitter = require('../dist/index');
 
 describe('emit()', () => {
 	test('should emit an event without additional parameters', () => {

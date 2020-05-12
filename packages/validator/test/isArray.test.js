@@ -1,4 +1,4 @@
-const { isArray } = require('../dist/umd/index');
+const { isArray } = require('../dist/index');
 
 describe('isArray()', () => {
 	test('should return true for arrays', () => {

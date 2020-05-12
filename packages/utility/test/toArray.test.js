@@ -1,4 +1,4 @@
-const { toArray } = require('../dist/umd/index');
+const { toArray } = require('../dist/index');
 
 describe('toArray()', () => {
 	test('should fail silently for non array-like-objects', () => {

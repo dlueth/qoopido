@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/emitter",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Ultra lightweight & flexible event emitter",
     "license": "MIT",
     "author": {

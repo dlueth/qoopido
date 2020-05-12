@@ -1,4 +1,4 @@
-const { isInstanceof } = require('../dist/umd/index');
+const { isInstanceof } = require('../dist/index');
 
 describe('isIntanceof()', () => {
 	test('should return true if matching', () => {

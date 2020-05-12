@@ -1,4 +1,4 @@
-const { isFunction } = require('../dist/umd/index');
+const { isFunction } = require('../dist/index');
 
 describe('isFunction()', () => {
 	test('should return true for functions', () => {

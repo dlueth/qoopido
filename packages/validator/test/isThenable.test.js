@@ -1,4 +1,4 @@
-const { isThenable } = require('../dist/umd/index');
+const { isThenable } = require('../dist/index');
 
 describe('isRegExp()', () => {
 	test('should return true for thenables', () => {

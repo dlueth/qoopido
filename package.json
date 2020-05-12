@@ -25,7 +25,8 @@
         "test": "jest ./packages",
         "test:coverage": "yarn build && jest --collectCoverage  ./packages",
         "build": "node script/build.js",
-        "publish": "lerna publish --canary --dist-tag prerelease --contents dist",
+        "publish": "lerna publish from-package --contents dist",
+        "publish:prerelease": "lerna publish --canary --dist-tag prerelease --contents dist",
         "prepack": "node script/build.js && node script/prepack.js"
     },
     "devDependencies": {

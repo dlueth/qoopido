@@ -1,4 +1,4 @@
-const { isString } = require('../dist/umd/index');
+const { isString } = require('../dist/index');
 
 describe('isString()', () => {
 	test('should return true for strings', () => {
