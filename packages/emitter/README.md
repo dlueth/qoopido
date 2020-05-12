@@ -5,7 +5,7 @@
 ![jsDelivr (npm)](https://img.shields.io/jsdelivr/npm/hm/@qoopido/emitter?label=jsdelivr&style=flat-square)
 
 
-Flexible & dead simple event emitter for Node.js supporting RegExp-based event subscription and global broadcast listeners.
+Ultra-flexible & dead simple event emitter supporting RegExp-based event subscription and global listeners.
 
 ## Installation
 

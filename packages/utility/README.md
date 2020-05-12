@@ -4,7 +4,7 @@
 ![NPM downloads](https://img.shields.io/npm/dm/@qoopido/utility.svg?label=npm&style=flat-square)
 ![jsDelivr (npm)](https://img.shields.io/jsdelivr/npm/hm/@qoopido/utility?label=jsdelivr&style=flat-square)
 
-Utility package providing helpful functions used throughout various packages.
+The swiss army knife of frequently used utility functions for your very own projects.
 
 ## Installation
 

@@ -4,7 +4,7 @@
 ![NPM downloads](https://img.shields.io/npm/dm/@qoopido/validator.svg?label=npm&style=flat-square)
 ![jsDelivr (npm)](https://img.shields.io/jsdelivr/npm/hm/@qoopido/validator?label=jsdelivr&style=flat-square)
 
-Package providing frequently used validator-functions.
+Validators against your daily dose of scratching your head about what the hell went wrong this time.
 
 ## Installation
 

@@ -1,7 +1,7 @@
 {
     "name": "@qoopido/utility",
     "version": "1.0.0",
-    "description": "Collection of frequently used utilities",
+    "description": "The swiss army knife of frequently used utility functions for your very own projects",
     "license": "MIT",
     "author": {
         "name": "Dirk Lueth",
