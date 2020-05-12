@@ -39,8 +39,8 @@
         "unsubscribe"
     ],
     "dependencies": {
-        "@qoopido/utility": "0.0.0",
-        "@qoopido/validator": "0.0.0"
+        "@qoopido/utility": "1.0.0",
+        "@qoopido/validator": "1.0.1"
     },
     "publishConfig": {
         "access": "public"

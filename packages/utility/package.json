@@ -28,7 +28,7 @@
         "utility"
     ],
     "dependencies": {
-        "@qoopido/validator": "0.0.0"
+        "@qoopido/validator": "1.0.1"
     },
     "publishConfig": {
         "access": "public"
