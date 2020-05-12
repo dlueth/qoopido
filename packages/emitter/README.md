@@ -1,7 +1,5 @@
 # Emitter
 
-[![David](https://img.shields.io/david/dlueth/qoopido.svg?style=flat-square)](https://github.com/dlueth/qoopido)
-[![License](https://img.shields.io/github/license/dlueth/qoopido.svg?style=flat-square)](https://github.com/dlueth/qoopido)
 [![NPM version](https://img.shields.io/npm/v/@qoopido/emitter.svg?style=flat-square)](https://www.npmjs.com/package/@qoopido/emitter)
 [![NPM downloads](https://img.shields.io/npm/dm/@qoopido/emitter.svg?style=flat-square)](https://www.npmjs.org/package/@qoopido/emitter)
 [![NPM downloads](https://img.shields.io/npm/dt/@qoopido/emitter.svg?style=flat-square)](https://www.npmjs.org/package/@qoopido/emitter)
