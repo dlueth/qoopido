@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/emitter",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Ultra-flexible & dead simple event emitter supporting RegExp-based event subscription and global listeners",
     "license": "MIT",
     "author": {
@@ -39,8 +39,8 @@
         "unsubscribe"
     ],
     "dependencies": {
-        "@qoopido/utility": "1.0.2",
-        "@qoopido/validator": "1.0.3"
+        "@qoopido/utility": "1.0.3",
+        "@qoopido/validator": "1.0.4"
     },
     "publishConfig": {
         "access": "public"

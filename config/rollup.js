@@ -10,10 +10,12 @@ const matchSuffix = /\.(\w+)$/;
 const matchIndex = /\/index$/;
 const paths       = {
     'umd': 'dist',
-    'es':  'dist/esm'
+    'es':  'dist/esm',
+    'tmp': 'temp'
 };
 
 rimraf.sync('./dist/*');
+rimraf.sync('./temp/*');
 
 function getFile(input, format, minified) {
     return paths[format] + input.substr(input.indexOf('/')).replace(matchSuffix, minified ? '.min.$1' : '.$1');
@@ -23,7 +25,36 @@ function getName(name, input) {
     return name + input.substr(input.indexOf('/')).replace(matchSuffix, '').replace(matchIndex, '');
 }
 
-export default (options) => {
+export function configureTemp(options) {
+    const banner   = `/**! ${options.name} ${options.version} | ${homepage} | (c) ${(new Date).getFullYear()} ${options.author.name || options.author} */`;
+    const external = options.dependencies ? Object.keys(options.dependencies).filter(dependency => packages.public.includes(dependency)) : [];
+    const globals  = {};
+
+    external.forEach(item => {
+        globals[item] = item;
+    });
+
+    return {
+        input: options.input,
+        output: [
+            {
+                file: getFile(options.input, 'tmp'),
+                name: getName(options.name, options.input),
+                format: 'cjs',
+                plugins: [],
+                globals
+            }
+        ],
+        external,
+        plugins: [
+            peerDepsExternal(),
+            resolve(),
+            commonjs(),
+        ]
+    };
+}
+
+export function configure(options) {
 	const banner   = `/**! ${options.name} ${options.version} | ${homepage} | (c) ${(new Date).getFullYear()} ${options.author.name || options.author} */`;
 	const external = options.dependencies ? Object.keys(options.dependencies).filter(dependency => packages.public.includes(dependency)) : [];
 	const globals  = {};

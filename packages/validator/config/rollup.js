@@ -1,4 +1,4 @@
-import configure from "../../../config/rollup";
+import { configure } from "../../../config/rollup";
 import { name, version, author, dependencies } from "../package.json";
 
 export default [

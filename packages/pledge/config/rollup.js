@@ -1,13 +1,24 @@
-import configure from "../../../config/rollup";
+import { configure, configureTemp } from "../../../config/rollup";
 import { name, version, author, dependencies } from "../package.json";
 
-export default [
-    "src/index.js",
-    "src/constants.js"
-].map((input) => configure({
-    input,
-    name,
-    version,
-    author,
-    dependencies
-}));
+const dist = [
+        "src/index.js"
+    ].map((input) => configure({
+        input,
+        name,
+        version,
+        author,
+        dependencies
+    }))
+
+const temp =  [
+        "src/constants.js"
+    ].map((input) => configureTemp({
+        input,
+        name,
+        version,
+        author,
+        dependencies
+    }))
+
+export default dist.concat(temp);
