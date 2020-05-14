@@ -18,10 +18,10 @@
     "main": "dist/index.js",
     "module": "dist/esm/index.js",
     "scripts": {
-        "lint": "eslint ./src/",
-        "lint:fix": "eslint --fix ./src/",
-        "test": "yarn build && jest ./test",
-        "test:coverage": "yarn build && jest --collectCoverage  ./test",
+        "lint": "eslint ./src",
+        "lint:fix": "eslint --fix ./src",
+        "test": "yarn build && jest --verbose ./src",
+        "test:coverage": "yarn build && jest --verbose --collectCoverage  ./src",
         "build": "rollup -c ./config/rollup.js"
     },
     "keywords": [
@@ -39,8 +39,8 @@
         "unsubscribe"
     ],
     "dependencies": {
-        "@qoopido/utility": "1.0.1",
-        "@qoopido/validator": "1.0.2"
+        "@qoopido/utility": "1.0.2",
+        "@qoopido/validator": "1.0.3"
     },
     "publishConfig": {
         "access": "public"

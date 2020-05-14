@@ -1,3 +1,5 @@
-import toArray from "./toArray";
+import doImmediate from "./function/doImmediate";
+import toArray from "./function/toArray";
+import Uuid from "./function/uuid";
 
-export { toArray };
+export { doImmediate, toArray, Uuid };

@@ -1,7 +1,7 @@
 {
-    "name": "@qoopido/validator",
-    "version": "1.0.3",
-    "description": "Validators against your daily dose of scratching your head about what the hell went wrong this time",
+    "name": "@qoopido/pledge",
+    "version": "1.0.0",
+    "description": "Promises on steroids - capable of resolving and rejecting with multiple values",
     "license": "MIT",
     "author": {
         "name": "Dirk Lueth",
@@ -25,8 +25,12 @@
         "build": "rollup -c ./config/rollup.js"
     },
     "keywords": [
-        "validator"
+        "promise"
     ],
+    "dependencies": {
+        "@qoopido/utility": "1.0.2",
+        "@qoopido/validator": "1.0.3"
+    },
     "publishConfig": {
         "access": "public"
     }

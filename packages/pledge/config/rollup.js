@@ -3,9 +3,7 @@ import { name, version, author, dependencies } from "../package.json";
 
 export default [
     "src/index.js",
-    "src/function/doImmediate.js",
-    "src/function/toArray.js",
-    "src/function/uuid.js",
+    "src/constants.js"
 ].map((input) => configure({
     input,
     name,

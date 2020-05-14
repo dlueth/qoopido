@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/utility",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "The swiss army knife of frequently used utility functions for your very own projects",
     "license": "MIT",
     "author": {
@@ -18,10 +18,10 @@
     "main": "dist/index.js",
     "module": "dist/esm/index.js",
     "scripts": {
-        "lint": "eslint ./src/",
-        "lint:fix": "eslint --fix ./src/",
-        "test": "yarn build && jest ./test",
-        "test:coverage": "yarn build && jest --collectCoverage  ./test",
+        "lint": "eslint ./src",
+        "lint:fix": "eslint --fix ./src",
+        "test": "yarn build && jest --verbose ./src",
+        "test:coverage": "yarn build && jest --verbose --collectCoverage  ./src",
         "build": "rollup -c ./config/rollup.js"
     },
     "keywords": [
