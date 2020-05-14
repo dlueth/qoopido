@@ -1,11 +1,17 @@
 import { isFunction, isObject } from "@qoopido/validator";
+import global from "../constant/global";
 import uuid from "./uuid";
 
 var strategy;
 
-if (isFunction(setImmediate)) {
+if ("setImmediate" in global && isFunction(setImmediate)) {
     strategy = setImmediate;
-} else if (isFunction(MutationObserver) && isObject(document)) {
+} else if (
+    "MutationObserver" in global &&
+    "document" in global &&
+    isFunction(MutationObserver) &&
+    isObject(document)
+) {
     (function () {
         var storage = {},
             element = document.createElement("div"),

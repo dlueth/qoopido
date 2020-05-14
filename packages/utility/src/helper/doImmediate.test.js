@@ -15,7 +15,7 @@ describe("doImmediate()", () => {
         MutationObserver = undefined;
         document = undefined;
 
-        const doImmediate = require("../../dist/function/doImmediate");
+        const doImmediate = require("../../dist/helper/doImmediate");
         const callback = jest.fn();
 
         doImmediate(callback);
@@ -34,7 +34,7 @@ describe("doImmediate()", () => {
     test("should successfully call the callback (MutationObserver)", () => {
         setImmediate = undefined;
 
-        const doImmediate = require("../../dist/function/doImmediate");
+        const doImmediate = require("../../dist/helper/doImmediate");
         var callback = jest.fn();
 
         doImmediate(callback);
@@ -55,7 +55,7 @@ describe("doImmediate()", () => {
         MutationObserver = undefined;
         document = undefined;
 
-        const doImmediate = require("../../dist/function/doImmediate");
+        const doImmediate = require("../../dist/helper/doImmediate");
         var callback = jest.fn();
 
         doImmediate(callback);

@@ -1,5 +1,16 @@
-import doImmediate from "./function/doImmediate";
-import toArray from "./function/toArray";
-import Uuid from "./function/uuid";
+import global from "./constant/global";
+import doImmediate from "./helper/doImmediate";
+import toArray from "./helper/toArray";
+import Uuid from "./helper/uuid";
 
-export { doImmediate, toArray, Uuid };
+var constant = {
+    global,
+};
+
+var helper = {
+    doImmediate,
+    toArray,
+    Uuid,
+};
+
+export { constant, helper };

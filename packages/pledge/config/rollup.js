@@ -12,7 +12,7 @@ const dist = [
     }))
 
 const temp =  [
-        "src/constants.js"
+        "src/constant.js"
     ].map((input) => configureTemp({
         input,
         name,

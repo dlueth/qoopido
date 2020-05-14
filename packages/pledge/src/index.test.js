@@ -1,5 +1,9 @@
 const Pledge = require("../dist/index");
-const { MSG_UNHANDLED_REJECTION, ERROR_EXECUTOR_NO_FUNCTION, ERROR_PLEDGES_NO_ARRAY } = require("../temp/constants")
+const {
+    MSG_UNHANDLED_REJECTION,
+    ERROR_EXECUTOR_NO_FUNCTION,
+    ERROR_PLEDGES_NO_ARRAY,
+} = require("../temp/constant");
 
 const _error = console.error;
 

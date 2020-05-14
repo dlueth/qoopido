@@ -1,4 +1,4 @@
-import { doImmediate, toArray } from "@qoopido/utility";
+import { helper } from "@qoopido/utility";
 import {
     isInstanceof,
     isTypeof,
@@ -12,7 +12,7 @@ import {
     STATE_PENDING,
     STATE_RESOLVED,
     STATE_REJECTED,
-} from "./constants";
+} from "./constant";
 
 var weakmap = new WeakMap();
 
@@ -22,7 +22,7 @@ function resolve() {
 
     properties.state = STATE_RESOLVED;
 
-    doImmediate(function () {
+    helper.doImmediate(function () {
         properties.handle(args);
     });
 }
@@ -33,7 +33,7 @@ function reject() {
 
     properties.state = STATE_REJECTED;
 
-    doImmediate(function () {
+    helper.doImmediate(function () {
         properties.handle(args);
     });
 }
@@ -41,7 +41,7 @@ function reject() {
 function handleUncaught(values) {
     console.error.apply(
         null,
-        [MSG_UNHANDLED_REJECTION].concat(toArray(values))
+        [MSG_UNHANDLED_REJECTION].concat(helper.toArray(values))
     );
 }
 
@@ -89,14 +89,14 @@ function handle(parameter) {
 function observe(pledge, index, properties) {
     pledge.then(
         function () {
-            properties.resolved[index] = toArray(arguments);
+            properties.resolved[index] = helper.toArray(arguments);
 
             properties.count++;
 
             check(properties);
         },
         function () {
-            properties.rejected.push(toArray(arguments));
+            properties.rejected.push(helper.toArray(arguments));
 
             check(properties);
         }
@@ -168,7 +168,7 @@ Pledge.prototype = {
         });
 
         if (properties.settled && properties.state !== STATE_PENDING) {
-            doImmediate(properties.handle);
+            helper.doImmediate(properties.handle);
         }
 
         return dfd.pledge;

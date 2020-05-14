@@ -1,4 +1,4 @@
-import { toArray } from "@qoopido/utility";
+import { helper } from "@qoopido/utility";
 import {
     isTypeof,
     isFunction,
@@ -243,7 +243,7 @@ Emitter.prototype = {
      * @returns {Emitter}
      */
     emit: function emit(name) {
-        var details = toArray(arguments, 1),
+        var details = helper.toArray(arguments, 1),
             listener = retrieveListener.call(this, name);
 
         if (listener.length) {

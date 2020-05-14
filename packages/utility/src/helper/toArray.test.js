@@ -1,4 +1,4 @@
-const toArray = require("../../dist/function/toArray");
+const toArray = require("../../dist/helper/toArray");
 
 describe("toArray()", () => {
     test("should fail silently for non array-like-objects", () => {
