@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/utility",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "The swiss army knife of frequently used utility functions for your very own projects",
     "license": "MIT",
     "author": {
@@ -28,7 +28,7 @@
         "utility"
     ],
     "dependencies": {
-        "@qoopido/validator": "1.0.2"
+        "@qoopido/validator": "1.0.4"
     },
     "publishConfig": {
         "access": "public"
