@@ -15,8 +15,11 @@ Ultra-flexible & dead simple event emitter supporting RegExp-based event subscri
 2. [@qoopido/queue](https://github.com/dlueth/qoopido/tree/master/packages/queue):
 Simple & versatile queue with built-in event emitter
 
-3. [@qoopido/validator](https://github.com/dlueth/qoopido/tree/master/packages/validator):
+3. [@qoopido/pledge](https://github.com/dlueth/qoopido/tree/master/packages/pledge):
+Promises on steroids - capable of resolving and rejecting with multiple values
+
+4. [@qoopido/validator](https://github.com/dlueth/qoopido/tree/master/packages/validator):
 Validators against your daily dose of scratching your head about what the hell went wrong this time
 
-4. [@qoopido/utility](https://github.com/dlueth/qoopido/tree/master/packages/utility):
+5. [@qoopido/utility](https://github.com/dlueth/qoopido/tree/master/packages/utility):
 The swiss army knife of frequently used utility functions for your very own projects
