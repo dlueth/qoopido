@@ -1,0 +1,37 @@
+{
+    "name": "@qoopido/queue",
+    "version": "1.0.0",
+    "description": "Simple & versatile queue with built-in event emitter",
+    "license": "MIT",
+    "author": {
+        "name": "Dirk Lueth",
+        "email": "info@qoopido.com"
+    },
+    "homepage": "https://github.com/dlueth/qoopido",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/dlueth/qoopido.git"
+    },
+    "bugs": {
+        "url": "https://github.com/dlueth/qoopido/issues"
+    },
+    "main": "dist/index.js",
+    "module": "dist/esm/index.js",
+    "scripts": {
+        "lint": "eslint ./src",
+        "lint:fix": "eslint --fix ./src",
+        "test": "yarn build && jest --verbose ./src",
+        "test:coverage": "yarn build && jest --verbose --collectCoverage  ./src",
+        "build": "rollup -c ./config/rollup.js"
+    },
+    "keywords": [
+        "queue"
+    ],
+    "dependencies": {
+        "@qoopido/emitter": "1.0.6",
+        "@qoopido/utility": "1.0.6"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}

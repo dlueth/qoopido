@@ -1,6 +1,7 @@
 import rimraf from 'rimraf';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import buble from '@rollup/plugin-buble';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
 import { homepage } from '../package.json';
@@ -26,7 +27,6 @@ function getName(name, input) {
 }
 
 export function configureTemp(options) {
-    const banner   = `/**! ${options.name} ${options.version} | ${homepage} | (c) ${(new Date).getFullYear()} ${options.author.name || options.author} */`;
     const external = options.dependencies ? Object.keys(options.dependencies).filter(dependency => packages.public.includes(dependency)) : [];
     const globals  = {};
 
@@ -50,6 +50,7 @@ export function configureTemp(options) {
             peerDepsExternal(),
             resolve(),
             commonjs(),
+            buble()
         ]
     };
 }
@@ -108,6 +109,7 @@ export function configure(options) {
 			peerDepsExternal(),
 			resolve(),
 			commonjs(),
+            buble()
 		]
 	};
 }
