@@ -1,10 +1,10 @@
-import { helper } from "@qoopido/utility";
 import {
     isInstanceof,
     isTypeof,
     isFunction,
     isArray,
 } from "@qoopido/validator";
+import { helper } from "@qoopido/utility";
 import {
     ERROR_EXECUTOR_NO_FUNCTION,
     ERROR_PLEDGES_NO_ARRAY,
@@ -13,12 +13,19 @@ import {
     STATE_RESOLVED,
     STATE_REJECTED,
 } from "./constant";
+import Deferred from "./class/deferred";
+import Observer from "./class/observer";
 
-var weakmap = new WeakMap();
+const weakmap = new WeakMap();
 
+/**
+ * Resolve a pledge
+ *
+ * @ignore
+ */
 function resolve() {
-    var properties = weakmap.get(this),
-        args = arguments;
+    const properties = weakmap.get(this);
+    const args = arguments;
 
     properties.state = STATE_RESOLVED;
 
@@ -27,9 +34,14 @@ function resolve() {
     });
 }
 
+/**
+ * Reject a pledge
+ *
+ * @ignore
+ */
 function reject() {
-    var properties = weakmap.get(this),
-        args = arguments;
+    const properties = weakmap.get(this);
+    const args = arguments;
 
     properties.state = STATE_REJECTED;
 
@@ -38,18 +50,33 @@ function reject() {
     });
 }
 
-function handleUncaught(values) {
+/**
+ * Handle uncaught Pledge-rejections
+ *
+ * @param {Error[]} errors
+ *
+ * @ignore
+ */
+function handleUncaught(errors) {
     console.error.apply(
         null,
-        [MSG_UNHANDLED_REJECTION].concat(helper.toArray(values))
+        [MSG_UNHANDLED_REJECTION].concat(helper.toArray(errors))
     );
 }
 
+/**
+ * Handle Pledge fulfilment
+ *
+ * @param {*[]} parameter
+ *
+ * @ignore
+ */
 function handle(parameter) {
-    var properties = weakmap.get(this),
-        state = properties.state,
-        pointer,
-        result;
+    const properties = weakmap.get(this);
+    const state = properties.state;
+
+    let pointer;
+    let result;
 
     if (!properties.settled) {
         properties.settled = true;
@@ -86,76 +113,86 @@ function handle(parameter) {
     properties[STATE_REJECTED].length = 0;
 }
 
-function observe(pledge, index, properties) {
-    pledge.then(
-        function () {
-            properties.resolved[index] = helper.toArray(arguments);
+/**
+ * Class Pledge
+ */
+export default class Pledge {
+    /**
+     * Constructor
+     *
+     * @param {Function} executor
+     */
+    constructor(executor) {
+        const self = this;
 
-            properties.count++;
-
-            check(properties);
-        },
-        function () {
-            properties.rejected.push(helper.toArray(arguments));
-
-            check(properties);
+        if (!isFunction(executor)) {
+            throw new TypeError(ERROR_EXECUTOR_NO_FUNCTION);
         }
-    );
-}
 
-function check(properties) {
-    if (properties.count === properties.total) {
-        properties.dfd.resolve.apply(null, [].concat(properties.resolved));
-    } else if (
-        properties.rejected.length + properties.count ===
-        properties.total
-    ) {
-        properties.dfd.reject.apply(null, [].concat(properties.rejected));
-    }
-}
+        weakmap.set(self, {
+            state: STATE_PENDING,
+            settled: false,
+            handle: handle.bind(self),
+            value: null,
+            resolved: [],
+            rejected: [],
+            count: 0,
+        });
 
-function Pledge(executor) {
-    var self = this;
-
-    if (!isFunction(executor)) {
-        throw new TypeError(ERROR_EXECUTOR_NO_FUNCTION);
+        try {
+            executor(resolve.bind(self), reject.bind(self));
+        } catch (error) {
+            reject.call(self, error);
+        }
     }
 
-    weakmap.set(self, {
-        state: STATE_PENDING,
-        settled: false,
-        handle: handle.bind(self),
-        value: null,
-        resolved: [],
-        rejected: [],
-        count: 0,
-    });
-
-    try {
-        executor(resolve.bind(self), reject.bind(self));
-    } catch (error) {
-        reject.call(self, error);
-    }
-
-    return self;
-}
-
-Pledge.prototype = {
-    isSettled: function () {
+    /**
+     * Check whether the Pledge is settled
+     *
+     * @returns {Boolean}
+     */
+    get isSettled() {
         return weakmap.get(this).state !== STATE_PENDING;
-    },
-    isPending: function () {
+    }
+
+    /**
+     * Check whether the Pledge is pending
+     *
+     * @returns {Boolean}
+     */
+    get isPending() {
         return weakmap.get(this).state === STATE_PENDING;
-    },
-    isResolved: function () {
+    }
+
+    /**
+     * Check whether the Pledge is resolved
+     *
+     * @returns {Boolean}
+     */
+    get isResolved() {
         return weakmap.get(this).state === STATE_RESOLVED;
-    },
-    isRejected: function () {
+    }
+
+    /**
+     * Check whether the Pledge is rejected
+     *
+     * @returns {Boolean}
+     */
+    get isRejected() {
         return weakmap.get(this).state === STATE_REJECTED;
-    },
-    then: function (onFulfill, onReject) {
-        var properties = weakmap.get(this),
-            dfd = Pledge.defer();
+    }
+
+    /**
+     * Attach separate onFulfill/onReject listener
+     *
+     * @param {Function} onFulfill
+     * @param {Function} onReject
+     *
+     * @returns {Pledge}
+     */
+    then(onFulfill, onReject) {
+        const properties = weakmap.get(this);
+        const dfd = Pledge.defer();
 
         properties[STATE_RESOLVED].push({
             handler: onFulfill || Pledge.resolve,
@@ -172,92 +209,146 @@ Pledge.prototype = {
         }
 
         return dfd.pledge;
-    },
-    always: function (listener) {
+    }
+
+    /**
+     * Attach a listener regardless of the outcome (alias of `finally`)
+     *
+     * @param {Function} listener
+     *
+     * @returns {Pledge}
+     */
+    always(listener) {
+        return this.finally(listener);
+    }
+
+    /**
+     * Attach a listener regardless of the outcome
+     *
+     * @param {Function} listener
+     *
+     * @returns {Pledge}
+     */
+    finally(listener) {
         return this.then(listener, listener);
-    },
-    finally: function (listener) {
-        return this.then(listener, listener);
-    },
-    catch: function (listener) {
+    }
+
+    /**
+     * Attach a listener to any rejection
+     *
+     * @param {Function} listener
+     *
+     * @returns {Pledge}
+     */
+    catch(listener) {
         return this.then(undefined, listener);
-    },
-};
-
-Pledge.defer = function () {
-    var self = {};
-
-    self.pledge = new Pledge(function (onFulfill, onReject) {
-        self.resolve = onFulfill;
-        self.reject = onReject;
-    });
-
-    return self;
-};
-
-Pledge.all = function (pledges) {
-    var dfd = Pledge.defer(),
-        properties,
-        i = 0,
-        pledge;
-
-    if (!isArray(pledges)) {
-        throw new TypeError(ERROR_PLEDGES_NO_ARRAY);
     }
 
-    if (pledges.length) {
-        properties = {
-            dfd: dfd,
-            resolved: [],
-            rejected: [],
-            total: pledges.length,
-            count: 0,
-        };
+    /**
+     * Create a deferred pledge
+     *
+     * @returns {Deferred}
+     * @static
+     */
+    static defer() {
+        return new Deferred();
+    }
 
-        for (; (pledge = pledges[i]); i++) {
-            observe(pledge, i, properties);
+    /**
+     * Return a pledge that gets resolved when all given
+     * pledges did resolve or any pledge did reject
+     *
+     * @param {Pledge[]} pledges
+     *
+     * @returns {Pledge}
+     * @static
+     */
+    static all(pledges) {
+        return new Observer(pledges).deferred.pledge;
+    }
+
+    /**
+     * Return a pledge that gets resolved or rejected when
+     * any pledge did resolve or reject
+     *
+     * @param {Pledge[]} pledges
+     *
+     * @returns {Pledge}
+     * @static
+     */
+    static race(pledges) {
+        if (!isArray(pledges)) {
+            throw new TypeError(ERROR_PLEDGES_NO_ARRAY);
         }
-    } else {
-        dfd.resolve();
+
+        const dfd = new Deferred();
+
+        if (pledges.length) {
+            pledges.forEach(function (pledge) {
+                pledge.then(dfd.resolve, dfd.reject);
+            });
+        } else {
+            dfd.resolve();
+        }
+
+        return dfd.pledge;
     }
 
-    return dfd.pledge;
-};
+    /**
+     * Return a resolved Pledge
+     *
+     * @returns {Pledge}
+     * @static
+     */
+    static resolve() {
+        const args = arguments;
 
-Pledge.race = function (pledges) {
-    var dfd = Pledge.defer(),
-        i = 0,
-        pledge;
-
-    if (!isArray(pledges)) {
-        throw new TypeError(ERROR_PLEDGES_NO_ARRAY);
+        return new Pledge(function (resolve) {
+            resolve.apply(null, args);
+        });
     }
 
-    for (; (pledge = pledges[i]); i++) {
-        pledge.then(dfd.resolve, dfd.reject);
+    /**
+     * Return a rejected Pledge
+     *
+     * @returns {Pledge}
+     * @static
+     */
+    static reject() {
+        const args = arguments;
+
+        return new Pledge(function (resolve, reject) {
+            reject.apply(null, args);
+        });
     }
 
-    if (!pledges.length) {
-        dfd.resolve();
+    /**
+     * Constant for state `pending`
+     *
+     * @returns {String}
+     * @static
+     */
+    static get STATE_PENDING() {
+        return STATE_PENDING;
     }
 
-    return dfd.pledge;
-};
+    /**
+     * Constant for state `resolved`
+     *
+     * @returns {String}
+     * @static
+     */
+    static get STATE_RESOLVED() {
+        return STATE_RESOLVED;
+    }
 
-Pledge.resolve = function () {
-    var args = arguments;
-
-    return new Pledge(function (resolve) {
-        resolve.apply(null, args);
-    });
-};
-
-Pledge.reject = function () {
-    var args = arguments;
-
-    return new Pledge(function (resolve, reject) {
-        reject.apply(null, args);
-    });
-};
-
-export default Pledge;
+    /**
+     * Constant for state `rejected`
+     *
+     * @returns {String}
+     * @static
+     */
+    static get STATE_REJECTED() {
+        return STATE_REJECTED;
+    }
+}

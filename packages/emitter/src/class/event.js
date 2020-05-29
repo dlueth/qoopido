@@ -1,36 +1,35 @@
-var weakmap = new WeakMap();
+const weakmap = new WeakMap();
 
 /**
  * Class Event
  *
- * @param {String} name
- * @param {Emitter} context
+ * @member {String} name
+ * @member {*} context
  */
-function Event(name, context) {
-    Object.defineProperty(this, "name", {
-        value: name,
-        enumerable: true,
-        configurable: false,
-        writable: false,
-    });
-
-    Object.defineProperty(this, "context", {
-        value: context,
-        enumerable: true,
-        configurable: false,
-        writable: false,
-    });
-
-    weakmap.set(this, { isCanceled: false });
-}
-
-Event.prototype = {
+export default class Event {
     /**
-     * Cancel an events processing immediately
+     * Constructor
+     *
+     * @param {String} name
+     * @param {*} context
      */
-    cancel: function cancel() {
-        weakmap.get(this).isCanceled = true;
-    },
+    constructor(name, context) {
+        Object.defineProperty(this, "name", {
+            value: name,
+            enumerable: true,
+            configurable: false,
+            writable: false,
+        });
+
+        Object.defineProperty(this, "context", {
+            value: context,
+            enumerable: true,
+            configurable: false,
+            writable: false,
+        });
+
+        weakmap.set(this, { isCanceled: false });
+    }
 
     /**
      * Retrieve an events cancelation state
@@ -39,7 +38,12 @@ Event.prototype = {
      */
     get isCanceled() {
         return weakmap.get(this).isCanceled;
-    },
-};
+    }
 
-export default Event;
+    /**
+     * Cancel an events processing immediately
+     */
+    cancel() {
+        weakmap.get(this).isCanceled = true;
+    }
+}

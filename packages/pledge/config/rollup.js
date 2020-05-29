@@ -9,7 +9,7 @@ const dist = [
         version,
         author,
         dependencies
-    }))
+    }));
 
 const temp =  [
         "src/constant.js"
@@ -19,6 +19,6 @@ const temp =  [
         version,
         author,
         dependencies
-    }))
+    }));
 
 export default dist.concat(temp);

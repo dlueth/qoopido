@@ -35,7 +35,7 @@ describe("doImmediate()", () => {
         setImmediate = undefined;
 
         const doImmediate = require("../../dist/helper/doImmediate");
-        var callback = jest.fn();
+        const callback = jest.fn();
 
         doImmediate(callback);
 
@@ -56,7 +56,7 @@ describe("doImmediate()", () => {
         document = undefined;
 
         const doImmediate = require("../../dist/helper/doImmediate");
-        var callback = jest.fn();
+        const callback = jest.fn();
 
         doImmediate(callback);
 

@@ -1,8 +1,9 @@
 import { isFunction, isObject } from "@qoopido/validator";
+import forEach from "./forEach";
 import global from "../constant/global";
 import uuid from "./uuid";
 
-var strategy;
+let strategy;
 
 if ("setImmediate" in global && isFunction(setImmediate)) {
     strategy = setImmediate;
@@ -13,21 +14,22 @@ if ("setImmediate" in global && isFunction(setImmediate)) {
     isObject(document)
 ) {
     (function () {
-        var storage = {},
-            element = document.createElement("div"),
-            observer = new MutationObserver(function (records) {
-                records.forEach(function (record) {
-                    var id = record.attributeName.substr(1);
+        const storage = {};
+        const element = document.createElement("div");
+        const observer = new MutationObserver(function (records) {
+            forEach(function (record) {
+                const id = record.attributeName.substr(1);
 
-                    storage[id]();
-                    delete storage[id];
-                });
+                storage[id]();
+
+                delete storage[id];
             });
+        });
 
         observer.observe(element, { attributes: true });
 
         strategy = function (callback) {
-            var id = uuid();
+            const id = uuid();
 
             storage[id] = callback;
 

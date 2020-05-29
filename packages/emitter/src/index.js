@@ -11,7 +11,7 @@ import Listener from "./class/listener";
 import Event from "./class/event";
 import { isIdentifier } from "./validator/index";
 
-var weakmap = new WeakMap();
+const weakmap = new WeakMap();
 
 /**
  * Initialize a weakmap for a given context
@@ -69,9 +69,9 @@ function filterRemoveExpression(listener) {
  * Sort listener array
  *
  * @param {Object} a
- * @param {int} a.timestamp
+ * @param {Number} a.timestamp
  * @param {Object} b
- * @param {int} b.timestamp
+ * @param {Number} b.timestamp
  *
  * @returns {Number}
  *
@@ -105,7 +105,7 @@ function mapListener(listener) {
  * @ignore
  */
 function applyEvent(listener, event, details) {
-    var self = this;
+    const self = this;
 
     listener.reduce(function (previous, next) {
         if (!event.isCanceled) {
@@ -115,11 +115,11 @@ function applyEvent(listener, event, details) {
 
             if (isThenable(previous)) {
                 return previous.then(function () {
-                    return next.callback.apply(this, [event].concat(details));
+                    return next.callback.apply(self, [event].concat(details));
                 });
             }
 
-            return next.callback.apply(this, [event].concat(details));
+            return next.callback.apply(self, [event].concat(details));
         }
     }, true);
 }
@@ -204,17 +204,18 @@ function unsubscribeExpression(expression, callback) {
  * @ignore
  */
 function retrieveListener(name) {
-    var listener, storage;
+    let listener;
 
     if (isString(name)) {
-        storage = weakmap.get(this);
+        const storage = weakmap.get(this);
+
         listener = storage.events[name] ? storage.events[name].slice() : [];
 
         if (this !== Emitter) {
             listener = listener.concat(retrieveListener.call(Emitter, name));
         }
 
-        storage.expressions.forEach((expression) => {
+        storage.expressions.forEach(function (expression) {
             if (expression.identifier.test(name)) {
                 listener.push(expression);
             }
@@ -229,11 +230,14 @@ function retrieveListener(name) {
 /**
  * Class Emitter
  */
-function Emitter() {
-    initialize(this);
-}
+class Emitter {
+    /**
+     * Constructor
+     */
+    constructor() {
+        initialize(this);
+    }
 
-Emitter.prototype = {
     /**
      * Emit an event
      *
@@ -242,16 +246,20 @@ Emitter.prototype = {
      *
      * @returns {Emitter}
      */
-    emit: function emit(name) {
-        var details = helper.toArray(arguments, 1),
-            listener = retrieveListener.call(this, name);
+    emit(name) {
+        const listener = retrieveListener.call(this, name);
 
         if (listener.length) {
-            applyEvent.call(this, listener, new Event(name, this), details);
+            applyEvent.call(
+                this,
+                listener,
+                new Event(name, this),
+                helper.toArray(arguments, 1)
+            );
         }
 
         return this;
-    },
+    }
 
     /**
      * Subscribe an event listener
@@ -263,9 +271,9 @@ Emitter.prototype = {
      *
      * @returns {Emitter}
      */
-    on: function on(identifier, callback, prepend, limit) {
+    on(identifier, callback, prepend, limit) {
         return Emitter.on.call(this, identifier, callback, prepend, limit);
-    },
+    }
 
     /**
      * Subscribe a once only event listener
@@ -276,9 +284,9 @@ Emitter.prototype = {
      *
      * @returns {Emitter}
      */
-    once: function once(identifier, callback, prepend) {
+    once(identifier, callback, prepend) {
         return Emitter.once.call(this, identifier, callback, prepend);
-    },
+    }
 
     /**
      * Subscribe a limited event listener
@@ -290,9 +298,9 @@ Emitter.prototype = {
      *
      * @returns {Emitter}
      */
-    limit: function limit(identifier, limit, callback, prepend) {
+    limit(identifier, limit, callback, prepend) {
         return Emitter.limit.call(this, identifier, limit, callback, prepend);
-    },
+    }
 
     /**
      * Unsubscribe an event listener
@@ -302,139 +310,149 @@ Emitter.prototype = {
      *
      * @returns {Emitter}
      */
-    off: function off(identifier, callback) {
+    off(identifier, callback) {
         return Emitter.off.call(this, identifier, callback);
-    },
+    }
 
     /**
      * Retrieve all listeners for a certain event
      *
      * @param {String} name
      *
-     * @returns {Listener[]}
+     * @returns {Function[]}
      */
-    listener: function listener(name) {
+    listener(name) {
         return Emitter.listener.call(this, name);
-    },
-};
-
-/**
- * Subscribe an event listener
- *
- * @param {String|RegExp|(String|RegExp)[]} identifier
- * @param {Function} callback
- * @param {Boolean=} prepend
- * @param {Number=} limit
- *
- * @returns {Emitter}
- *
- * @static
- */
-Emitter.on = function on(identifier, callback, prepend, limit) {
-    if (isIdentifier(identifier) && isFunction(callback)) {
-        var storage = weakmap.get(this);
-
-        if (isString(identifier)) {
-            subscribeEvent.call(storage, identifier, callback, prepend, limit);
-        }
-
-        if (isRegExp(identifier)) {
-            subscribeExpression.call(
-                storage,
-                identifier,
-                callback,
-                prepend,
-                limit
-            );
-        }
-
-        if (isArray(identifier)) {
-            identifier.forEach((identifier) => {
-                this.on(identifier, callback, prepend, limit);
-            });
-        }
     }
 
-    return this;
-};
+    /**
+     * Subscribe an event listener
+     *
+     * @param {String|RegExp|(String|RegExp)[]} identifier
+     * @param {Function} callback
+     * @param {Boolean=} prepend
+     * @param {Number=} limit
+     *
+     * @returns {Emitter}
+     *
+     * @static
+     */
+    static on(identifier, callback, prepend, limit) {
+        const self = this;
 
-/**
- * Subscribe a once only event listener
- *
- * @param {String|RegExp|(String|RegExp)[]} identifier
- * @param {Function} callback
- * @param {Boolean=} prepend
- *
- * @returns {Emitter}
- *
- * @static
- */
-Emitter.once = function once(identifier, callback, prepend) {
-    return this.on(identifier, callback, prepend, 1);
-};
+        if (isIdentifier(identifier) && isFunction(callback)) {
+            const storage = weakmap.get(self);
 
-/**
- * Subscribe a limited event listener
- *
- * @param {String|RegExp|(String|RegExp)[]} identifier
- * @param {Number} limit
- * @param {Function} callback
- * @param {Boolean=} prepend
- *
- * @returns {Emitter}
- *
- * @static
- */
-Emitter.limit = function limit(identifier, limit, callback, prepend) {
-    return this.on(identifier, callback, prepend, limit);
-};
+            if (isString(identifier)) {
+                subscribeEvent.call(
+                    storage,
+                    identifier,
+                    callback,
+                    prepend,
+                    limit
+                );
+            }
 
-/**
- * Unsubscribe an event listener
- *
- * @param {String|RegExp|(String|RegExp)[]} identifier
- * @param {Function=} callback
- *
- * @returns {Emitter}
- *
- * @static
- */
-Emitter.off = function off(identifier, callback) {
-    if (
-        isIdentifier(identifier) &&
-        (isFunction(callback) || isTypeof(callback, "undefined"))
-    ) {
-        var storage = weakmap.get(this);
+            if (isRegExp(identifier)) {
+                subscribeExpression.call(
+                    storage,
+                    identifier,
+                    callback,
+                    prepend,
+                    limit
+                );
+            }
 
-        if (isString(identifier)) {
-            unsubscribeEvent.call(storage, identifier, callback);
+            if (isArray(identifier)) {
+                identifier.forEach(function (identifier) {
+                    self.on(identifier, callback, prepend, limit);
+                });
+            }
         }
 
-        if (isRegExp(identifier)) {
-            unsubscribeExpression.call(storage, identifier, callback);
-        }
-
-        if (isArray(identifier)) {
-            identifier.forEach((identifier) => {
-                this.off(identifier, callback);
-            });
-        }
+        return self;
     }
 
-    return this;
-};
+    /**
+     * Subscribe a once only event listener
+     *
+     * @param {String|RegExp|(String|RegExp)[]} identifier
+     * @param {Function} callback
+     * @param {Boolean=} prepend
+     *
+     * @returns {Emitter}
+     *
+     * @static
+     */
+    static once(identifier, callback, prepend) {
+        return this.on(identifier, callback, prepend, 1);
+    }
 
-/**
- * Retrieve all listeners for a certain event
- *
- * @param {String} name
- *
- * @returns {Listener[]}
- *
- * @static
- */
-Emitter.listener = function listener(name) {
-    return retrieveListener.call(this, name).map(mapListener);
-};
+    /**
+     * Subscribe a limited event listener
+     *
+     * @param {String|RegExp|(String|RegExp)[]} identifier
+     * @param {Number} limit
+     * @param {Function} callback
+     * @param {Boolean=} prepend
+     *
+     * @returns {Emitter}
+     *
+     * @static
+     */
+    static limit(identifier, limit, callback, prepend) {
+        return this.on(identifier, callback, prepend, limit);
+    }
+
+    /**
+     * Unsubscribe an event listener
+     *
+     * @param {String|RegExp|(String|RegExp)[]} identifier
+     * @param {Function=} callback
+     *
+     * @returns {Emitter}
+     *
+     * @static
+     */
+    static off(identifier, callback) {
+        const self = this;
+
+        if (
+            isIdentifier(identifier) &&
+            (isFunction(callback) || isTypeof(callback, "undefined"))
+        ) {
+            const storage = weakmap.get(self);
+
+            if (isString(identifier)) {
+                unsubscribeEvent.call(storage, identifier, callback);
+            }
+
+            if (isRegExp(identifier)) {
+                unsubscribeExpression.call(storage, identifier, callback);
+            }
+
+            if (isArray(identifier)) {
+                identifier.forEach(function (identifier) {
+                    self.off(identifier, callback);
+                });
+            }
+        }
+
+        return self;
+    }
+
+    /**
+     * Retrieve all listeners for a certain event
+     *
+     * @param {String} name
+     *
+     * @returns {Function[]}
+     *
+     * @static
+     */
+    static listener(name) {
+        return retrieveListener.call(this, name).map(mapListener);
+    }
+}
 
 export default initialize(Emitter);

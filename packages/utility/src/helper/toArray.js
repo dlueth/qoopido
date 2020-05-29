@@ -1,11 +1,12 @@
 import { isTypeof } from "@qoopido/validator";
 
-var arrayPrototypeSlice = Array.prototype.slice;
+const arrayPrototypeSlice = Array.prototype.slice;
 
 /**
  * Convert an array-like-object to an array
  *
  * @param {*} arrayLikeObject
+ * @param {number} [start]
  *
  * @returns {*[]|undefined}
  */

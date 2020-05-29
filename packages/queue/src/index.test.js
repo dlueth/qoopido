@@ -1,10 +1,26 @@
 const Emitter = require("@qoopido/emitter");
 const Queue = require("../dist/index");
+const constant = require("../temp/constant");
 
 describe("Queue()", () => {
     test("should return a new instance", () => {
         expect(new Queue() instanceof Emitter).toBe(true);
         expect(new Queue() instanceof Queue).toBe(true);
+    });
+});
+
+describe("get items()", () => {
+    test("should return an empty array for an empty queue", () => {
+        expect(new Queue().items).toEqual([]);
+    });
+
+    test("should return an array of all queued items", () => {
+        const values = Array.from(
+            { length: Math.max(2, Math.ceil(Math.random() * 40)) },
+            () => Math.floor(Math.random() * 40)
+        );
+
+        expect(new Queue(values).items).toEqual(values);
     });
 });
 
@@ -42,7 +58,7 @@ describe("enqueue()", () => {
     test("should correctly add multiple items to the queue", () => {
         const queue = new Queue();
         const values = Array.from(
-            { length: Math.floor(Math.random() * 40) },
+            { length: Math.max(2, Math.ceil(Math.random() * 40)) },
             () => Math.floor(Math.random() * 40)
         );
         const callback = jest.fn();
@@ -69,7 +85,7 @@ describe("dequeue()", () => {
     test("should correctly remove items from the queue", () => {
         const queue = new Queue();
         const values = Array.from(
-            { length: Math.floor(Math.random() * 40) },
+            { length: Math.max(2, Math.ceil(Math.random() * 40)) },
             () => Math.floor(Math.random() * 40)
         );
         const callback = jest.fn();
@@ -90,5 +106,17 @@ describe("dequeue()", () => {
             expect(callback.mock.calls[index][0].context).toBe(queue);
             expect(callback.mock.calls[index][1]).toEqual(value);
         });
+    });
+});
+
+describe("static get EVENT_ENQUEUE()", () => {
+    test("should correctly return the value of `EVENT_ENQUEUE`", () => {
+        expect(Queue.EVENT_ENQUEUE).toBe(constant.EVENT_ENQUEUE);
+    });
+});
+
+describe("static get EVENT_DEQUEUE()", () => {
+    test("should correctly return the value of `EVENT_ENQUEUE`", () => {
+        expect(Queue.EVENT_DEQUEUE).toBe(constant.EVENT_DEQUEUE);
     });
 });

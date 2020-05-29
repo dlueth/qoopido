@@ -3,7 +3,7 @@ const matchUuid = /(?:^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]
 
 describe("Uuid()", () => {
     test("generated UUIDs should validate", () => {
-        var i = 0;
+        let i = 0;
 
         for (i; i < 1000; i++) {
             expect(matchUuid.test(uuid())).toBe(true);
@@ -11,7 +11,7 @@ describe("Uuid()", () => {
     });
 
     test("subsequent UUIDs should always be different", () => {
-        var i = 0;
+        let i = 0;
 
         for (i; i < 1000; i++) {
             expect(uuid()).not.toMatch(uuid());

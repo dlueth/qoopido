@@ -2,7 +2,7 @@
  * Check if value is of a certain type
  *
  * @param {*} value
- * @param {string} type
+ * @param {String} type
  *
  * @returns {Boolean}
  */

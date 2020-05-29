@@ -7,6 +7,7 @@ export default [
     "src/constant/global.js",
     "src/helper/index.js",
     "src/helper/doImmediate.js",
+    "src/helper/forEach.js",
     "src/helper/toArray.js",
     "src/helper/uuid.js",
 ].map((input) => configure({
