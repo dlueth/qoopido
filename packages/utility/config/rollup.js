@@ -6,6 +6,7 @@ export default [
     "src/constant/index.js",
     "src/constant/global.js",
     "src/helper/index.js",
+    "src/helper/doIdle.js",
     "src/helper/doImmediate.js",
     "src/helper/forEach.js",
     "src/helper/toArray.js",
