@@ -1,16 +1,6 @@
 /* istanbul ignore file */
-import { isTypeof } from "@qoopido/validator";
-
-export default (function () {
-    if (!isTypeof(self, "undefined")) {
-        return self;
-    }
-
-    if (!isTypeof(window, "undefined")) {
-        return window;
-    }
-
-    if (!isTypeof(global, "undefined")) {
-        return global;
-    }
-})();
+export default (typeof globalThis === "object" &&
+    globalThis.globalThis === globalThis &&
+    globalThis) ||
+    (typeof self === "object" && self.self === self && self) ||
+    (typeof global === "object" && global.global === global && global);
