@@ -1,6 +1,7 @@
+import doIdle from "./doIdle";
 import doImmediate from "./doImmediate";
 import forEach from "./forEach";
 import toArray from "./toArray";
 import Uuid from "./uuid";
 
-export { doImmediate, forEach, toArray, Uuid };
+export { doIdle, doImmediate, forEach, toArray, Uuid };

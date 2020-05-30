@@ -41,7 +41,7 @@ if ("setImmediate" in global && isFunction(setImmediate)) {
 }
 
 /**
- * Immediately xecute a callback function, yet still deferred
+ * Immediately execute a callback function, yet still deferred
  *
  * @param {Function} callback
  */
