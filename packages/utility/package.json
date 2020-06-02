@@ -20,8 +20,8 @@
     "scripts": {
         "lint": "eslint ./src",
         "lint:fix": "eslint --fix ./src",
-        "test": "yarn build && jest --verbose ./src",
-        "test:coverage": "yarn build && jest --verbose --collectCoverage  ./src",
+        "test": "yarn build && jest --verbose --config ../../.jestrc.js ./src",
+        "test:coverage": "yarn build && jest --verbose --config ../../.jestrc.js --collectCoverage  ./src",
         "build": "rollup -c ./config/rollup.js"
     },
     "keywords": [
