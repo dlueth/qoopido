@@ -24,7 +24,7 @@ describe("doImmediate()", () => {
                 } catch (error) {
                     reject(error);
                 }
-            });
+            }, 20);
         });
     });
 
@@ -52,7 +52,7 @@ describe("doImmediate()", () => {
                 } catch (error) {
                     reject(error);
                 }
-            });
+            }, 20);
         });
     });
 
