@@ -7,9 +7,9 @@
  */
 export default function hash(value) {
     var hash = 5381,
-        i    = value.length;
+        i = value.length;
 
-    while(i) {
+    while (i) {
         hash = (hash * 33) ^ value.charCodeAt(--i);
     }
 

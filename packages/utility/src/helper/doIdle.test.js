@@ -41,12 +41,20 @@ describe("doImmediate()", () => {
             setTimeout(() => {
                 try {
                     expect(callback.mock.calls.length).toBe(1);
-                    expect(typeof callback.mock.calls[0][0]).toBe('object');
+                    expect(typeof callback.mock.calls[0][0]).toBe("object");
                     expect(callback.mock.calls[0][0].didTimeout).toBe(false);
-                    expect(typeof callback.mock.calls[0][0].timeRemaining).toBe('function');
-                    expect(typeof callback.mock.calls[0][0].timeRemaining()).toBe('number');
-                    expect(callback.mock.calls[0][0].timeRemaining()).toBeGreaterThanOrEqual(0);
-                    expect(callback.mock.calls[0][0].timeRemaining()).toBeLessThanOrEqual(50);
+                    expect(typeof callback.mock.calls[0][0].timeRemaining).toBe(
+                        "function"
+                    );
+                    expect(
+                        typeof callback.mock.calls[0][0].timeRemaining()
+                    ).toBe("number");
+                    expect(
+                        callback.mock.calls[0][0].timeRemaining()
+                    ).toBeGreaterThanOrEqual(0);
+                    expect(
+                        callback.mock.calls[0][0].timeRemaining()
+                    ).toBeLessThanOrEqual(50);
 
                     resolve();
                 } catch (error) {
@@ -55,5 +63,4 @@ describe("doImmediate()", () => {
             }, 20);
         });
     });
-
 });
