@@ -1,4 +1,11 @@
 module.exports = {
+    verbose: true,
+    coveragePathIgnorePatterns: [
+        "<rootDir>/config",
+        "<rootDir>/coverage",
+        "<rootDir>/node_modules",
+        "<rootDir>/temp"
+    ],
     coverageThreshold: {
         global: {
             statements: 100,
