@@ -17,7 +17,7 @@ if ("setImmediate" in global && isFunction(setImmediate)) {
         const storage = {};
         const element = document.createElement("div");
         const observer = new MutationObserver(function (records) {
-            forEach(function (record) {
+            forEach(records, function (record) {
                 const id = record.attributeName.substr(1);
 
                 storage[id]();
