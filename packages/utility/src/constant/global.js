@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+/* istanbul ignore next */
 export default (typeof globalThis === "object" &&
     globalThis.globalThis === globalThis &&
     globalThis) ||
