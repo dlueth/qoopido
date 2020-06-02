@@ -10,101 +10,50 @@ describe("doImmediate()", () => {
     });
 
     test("should successfully call the callback (native)", () => {
-        const doIdle = require("../../dist/helper/doIdle");
-        const callback = jest.fn();
+        return new Promise((resolve, reject) => {
+            const doIdle = require("../../dist/helper/doIdle");
+            const callback = jest.fn();
 
-        doIdle(callback);
+            doIdle(callback);
 
-        setTimeout(() => {
-            try {
-                expect(callback.mock.calls.length).toBe(1);
+            setTimeout(() => {
+                try {
+                    expect(callback.mock.calls.length).toBe(1);
 
-                resolve();
-            } catch (error) {
-                reject(error);
-            }
-        }, 50);
-    });
-
-    test("should successfully call the callback (setTimeout)", () => {
-        global.requestIdleCallback = undefined;
-        global.cancelIdleCallback = undefined;
-
-        const doIdle = require("../../dist/helper/doIdle");
-        const callback = jest.fn();
-
-        doIdle(callback);
-
-        setTimeout(() => {
-            try {
-                expect(callback.mock.calls.length).toBe(1);
-
-                resolve();
-            } catch (error) {
-                reject(error);
-            }
-        }, 0);
-    });
-
-    /*
-    test("should successfully call the callback (setImmediate)", () => {
-        MutationObserver = undefined;
-        document = undefined;
-
-        const doImmediate = require("../../dist/helper/doImmediate");
-        const callback = jest.fn();
-
-        doImmediate(callback);
-
-        setTimeout(() => {
-            try {
-                expect(callback.mock.calls.length).toBe(1);
-
-                resolve();
-            } catch (error) {
-                reject(error);
-            }
-        });
-    });
-
-    test("should successfully call the callback (MutationObserver)", () => {
-        setImmediate = undefined;
-
-        const doImmediate = require("../../dist/helper/doImmediate");
-        const callback = jest.fn();
-
-        doImmediate(callback);
-
-        setTimeout(() => {
-            try {
-                expect(callback.mock.calls.length).toBe(1);
-
-                resolve();
-            } catch (error) {
-                reject(error);
-            }
+                    resolve();
+                } catch (error) {
+                    reject(error);
+                }
+            });
         });
     });
 
     test("should successfully call the callback (setTimeout)", () => {
-        setImmediate = undefined;
-        MutationObserver = undefined;
-        document = undefined;
+        return new Promise((resolve, reject) => {
+            global.requestIdleCallback = undefined;
+            global.cancelIdleCallback = undefined;
 
-        const doImmediate = require("../../dist/helper/doImmediate");
-        const callback = jest.fn();
+            const doIdle = require("../../dist/helper/doIdle");
+            const callback = jest.fn();
 
-        doImmediate(callback);
+            doIdle(callback);
 
-        setTimeout(() => {
-            try {
-                expect(callback.mock.calls.length).toBe(1);
+            setTimeout(() => {
+                try {
+                    expect(callback.mock.calls.length).toBe(1);
+                    expect(typeof callback.mock.calls[0][0]).toBe('object');
+                    expect(callback.mock.calls[0][0].didTimeout).toBe(false);
+                    expect(typeof callback.mock.calls[0][0].timeRemaining).toBe('function');
+                    expect(typeof callback.mock.calls[0][0].timeRemaining()).toBe('number');
+                    expect(callback.mock.calls[0][0].timeRemaining()).toBeGreaterThanOrEqual(0);
+                    expect(callback.mock.calls[0][0].timeRemaining()).toBeLessThanOrEqual(50);
 
-                resolve();
-            } catch (error) {
-                reject(error);
-            }
+                    resolve();
+                } catch (error) {
+                    reject(error);
+                }
+            });
         });
     });
-    */
+
 });
