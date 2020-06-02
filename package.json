@@ -26,8 +26,8 @@
         "test:coverage": "yarn build && jest --verbose --config ./.jestrc.js --collectCoverage ./packages",
         "test:ci": "yarn build && jest --verbose --config ./.jestrc.js --collectCoverage --coverageDirectory ./coverage ./packages",
         "build": "node script/build.js",
-        "publish": "lerna publish --contents dist",
-        "publish:prerelease": "lerna publish --canary --dist-tag prerelease --contents dist",
+        "publish": "lerna publish --mesage \"chore: publish\" --contents dist",
+        "publish:prerelease": "lerna publish --mesage \"chore: publish prerelease\" --canary --dist-tag prerelease --contents dist",
         "prepack": "node script/build.js && node script/prepack.js"
     },
     "devDependencies": {
