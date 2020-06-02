@@ -11,5 +11,7 @@ locations.public.forEach((location) => {
 
     delete pkg.scripts;
 
-    fs.writeFileSync(location + '/dist/package.json', JSON.stringify(pkg, null, 4))
+    fs.writeFileSync(location + '/dist/package.json', JSON.stringify(pkg, null, 4));
+    fs.copyFileSync(location + '/README.md', location + '/dist/README.md');
+    fs.copyFileSync(location + '/../../LICENSE', location + '/dist/LICENSE');
 });
