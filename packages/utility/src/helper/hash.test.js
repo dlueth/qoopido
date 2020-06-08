@@ -1,4 +1,4 @@
-const hash = require("../../dist/helper/hash");
+import hash from "./hash";
 
 describe("hash()", () => {
     test("should create the same hash for the same input", () => {

@@ -1,5 +1,5 @@
-import { configure } from "../../../config/rollup";
-import { name, version, author, dependencies } from "../package.json";
+import { configure } from "../../rollup.config.js";
+import { name, version, author, dependencies } from "./package.json";
 
 export default [
     "src/index.js",

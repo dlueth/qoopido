@@ -1,4 +1,4 @@
-const isThenable = require("../dist/isThenable");
+import isThenable from "./isThenable";
 
 describe("isRegExp()", () => {
     test("should return true for thenables", () => {

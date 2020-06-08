@@ -11,7 +11,7 @@ describe("doImmediate()", () => {
 
     test("should successfully call the callback (native)", () => {
         return new Promise((resolve, reject) => {
-            const doIdle = require("../../dist/helper/doIdle");
+            const doIdle = require("./doIdle").default;
             const callback = jest.fn();
 
             doIdle(callback);
@@ -33,7 +33,7 @@ describe("doImmediate()", () => {
             global.requestIdleCallback = undefined;
             global.cancelIdleCallback = undefined;
 
-            const doIdle = require("../../dist/helper/doIdle");
+            const doIdle = require("./doIdle").default;
             const callback = jest.fn();
 
             doIdle(callback);

@@ -1,4 +1,4 @@
-const isString = require("../dist/isString");
+import isString from "./isString";
 
 describe("isString()", () => {
     test("should return true for strings", () => {

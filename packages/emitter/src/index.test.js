@@ -1,4 +1,4 @@
-const Emitter = require("../dist/index");
+import Emitter from "./index";
 
 describe("emit()", () => {
     test("should emit an event without additional parameters", () => {

@@ -1,6 +1,6 @@
-const Emitter = require("@qoopido/emitter");
-const Queue = require("../dist/index");
-const constant = require("../temp/constant");
+import Emitter from "@qoopido/emitter";
+import Queue from "./index";
+import { EVENT_ENQUEUE, EVENT_DEQUEUE } from "./constant";
 
 describe("Queue()", () => {
     test("should return a new instance", () => {
@@ -111,12 +111,12 @@ describe("dequeue()", () => {
 
 describe("static get EVENT_ENQUEUE()", () => {
     test("should correctly return the value of `EVENT_ENQUEUE`", () => {
-        expect(Queue.EVENT_ENQUEUE).toBe(constant.EVENT_ENQUEUE);
+        expect(Queue.EVENT_ENQUEUE).toBe(EVENT_ENQUEUE);
     });
 });
 
 describe("static get EVENT_DEQUEUE()", () => {
     test("should correctly return the value of `EVENT_ENQUEUE`", () => {
-        expect(Queue.EVENT_DEQUEUE).toBe(constant.EVENT_DEQUEUE);
+        expect(Queue.EVENT_DEQUEUE).toBe(EVENT_DEQUEUE);
     });
 });

@@ -1,4 +1,4 @@
-const forEach = require("../../dist/helper/forEach");
+import forEach from "./forEach";
 
 describe("forEach()", () => {
     test("should fail on invalid values", () => {

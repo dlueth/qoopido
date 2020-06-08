@@ -1,5 +1,12 @@
-const Pledge = require("../dist/index");
-const constant = require("../temp/constant");
+import Pledge from "./index";
+import {
+    ERROR_EXECUTOR_NO_FUNCTION,
+    ERROR_PLEDGES_NO_ARRAY,
+    MSG_UNHANDLED_REJECTION,
+    STATE_PENDING,
+    STATE_RESOLVED,
+    STATE_REJECTED,
+} from "./constant";
 
 const _error = console.error;
 
@@ -22,7 +29,7 @@ describe("Pledge()", () => {
         }).toThrow(TypeError);
         expect(() => {
             new Pledge();
-        }).toThrow(constant.ERROR_EXECUTOR_NO_FUNCTION);
+        }).toThrow(ERROR_EXECUTOR_NO_FUNCTION);
     });
 
     test("should successfully return a new instance", () => {
@@ -51,7 +58,7 @@ describe("Pledge()", () => {
                 try {
                     expect(callback.mock.calls[0].length).toBe(2);
                     expect(callback.mock.calls[0][0]).toBe(
-                        constant.MSG_UNHANDLED_REJECTION
+                        MSG_UNHANDLED_REJECTION
                     );
                     expect(callback.mock.calls[0][1]).toBe(error);
 
@@ -78,7 +85,7 @@ describe("Pledge()", () => {
                 try {
                     expect(callback.mock.calls[0].length).toBe(2);
                     expect(callback.mock.calls[0][0]).toBe(
-                        constant.MSG_UNHANDLED_REJECTION
+                        MSG_UNHANDLED_REJECTION
                     );
                     expect(callback.mock.calls[0][1]).toBe(error);
 
@@ -105,7 +112,7 @@ describe("Pledge()", () => {
                 try {
                     expect(callback.mock.calls[0].length).toBe(2);
                     expect(callback.mock.calls[0][0]).toBe(
-                        constant.MSG_UNHANDLED_REJECTION
+                        MSG_UNHANDLED_REJECTION
                     );
                     expect(callback.mock.calls[0][1]).toBe(value);
 
@@ -600,21 +607,21 @@ describe("Pledge.all()", () => {
         }).toThrow(TypeError);
         expect(() => {
             Pledge.all();
-        }).toThrow(constant.ERROR_PLEDGES_NO_ARRAY);
+        }).toThrow(ERROR_PLEDGES_NO_ARRAY);
 
         expect(() => {
             Pledge.all({});
         }).toThrow(TypeError);
         expect(() => {
             Pledge.all({});
-        }).toThrow(constant.ERROR_PLEDGES_NO_ARRAY);
+        }).toThrow(ERROR_PLEDGES_NO_ARRAY);
 
         expect(() => {
             Pledge.all("test");
         }).toThrow(TypeError);
         expect(() => {
             Pledge.all("test");
-        }).toThrow(constant.ERROR_PLEDGES_NO_ARRAY);
+        }).toThrow(ERROR_PLEDGES_NO_ARRAY);
     });
 
     test("should resolve when all pledges did resolve", () => {
@@ -692,21 +699,21 @@ describe("Pledge.race()", () => {
         }).toThrow(TypeError);
         expect(() => {
             Pledge.race();
-        }).toThrow(constant.ERROR_PLEDGES_NO_ARRAY);
+        }).toThrow(ERROR_PLEDGES_NO_ARRAY);
 
         expect(() => {
             Pledge.race({});
         }).toThrow(TypeError);
         expect(() => {
             Pledge.race({});
-        }).toThrow(constant.ERROR_PLEDGES_NO_ARRAY);
+        }).toThrow(ERROR_PLEDGES_NO_ARRAY);
 
         expect(() => {
             Pledge.race("test");
         }).toThrow(TypeError);
         expect(() => {
             Pledge.race("test");
-        }).toThrow(constant.ERROR_PLEDGES_NO_ARRAY);
+        }).toThrow(ERROR_PLEDGES_NO_ARRAY);
     });
 
     test("should resolve when any one pledge did resolve", () => {
@@ -779,18 +786,18 @@ describe("Pledge.race()", () => {
 
 describe("static get STATE_PENDING()", () => {
     test("should correctly return the value of `STATE_PENDING`", () => {
-        expect(Pledge.STATE_PENDING).toBe(constant.STATE_PENDING);
+        expect(Pledge.STATE_PENDING).toBe(STATE_PENDING);
     });
 });
 
 describe("static get STATE_RESOLVED()", () => {
     test("should correctly return the value of `STATE_RESOLVED`", () => {
-        expect(Pledge.STATE_RESOLVED).toBe(constant.STATE_RESOLVED);
+        expect(Pledge.STATE_RESOLVED).toBe(STATE_RESOLVED);
     });
 });
 
 describe("static get STATE_REJECTED()", () => {
     test("should correctly return the value of `STATE_REJECTED`", () => {
-        expect(Pledge.STATE_REJECTED).toBe(constant.STATE_REJECTED);
+        expect(Pledge.STATE_REJECTED).toBe(STATE_REJECTED);
     });
 });

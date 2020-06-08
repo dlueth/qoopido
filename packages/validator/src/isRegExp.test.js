@@ -1,4 +1,4 @@
-const isRegExp = require("../dist/isRegExp");
+import isRegExp from "./isRegExp";
 
 describe("isRegExp()", () => {
     test("should return true for RegExps", () => {

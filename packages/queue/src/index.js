@@ -13,7 +13,7 @@ export default class Queue extends Emitter {
     /**
      * Constructor
      *
-     * @param {*[]} items
+     * @param {*[]} [items]
      */
     constructor(items) {
         super();

@@ -1,4 +1,4 @@
-const isInstanceof = require("../dist/isInstanceof");
+import isInstanceof from "./isInstanceof";
 
 describe("isIntanceof()", () => {
     test("should return true if matching", () => {

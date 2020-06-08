@@ -1,4 +1,4 @@
-const isArray = require("../dist/isArray");
+import isArray from "./isArray";
 
 describe("isArray()", () => {
     test("should return true for arrays", () => {

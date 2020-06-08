@@ -1,4 +1,4 @@
-const isFalsy = require("../dist/isFalsy");
+import isFalsy from "./isFalsy";
 
 describe("isFalsy()", () => {
     test("should return true for falsy values", () => {

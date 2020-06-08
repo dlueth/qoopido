@@ -1,4 +1,4 @@
-const isFunction = require("../dist/isFunction");
+import isFunction from "./isFunction";
 
 describe("isFunction()", () => {
     test("should return true for functions", () => {

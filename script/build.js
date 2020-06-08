@@ -11,7 +11,7 @@ spawnSync(
 		'{' + packages.public.join(',') + '}',
 		'--no-private',
 		'--',
-		'rollup -c ./config/rollup.js'
+		'rollup -c'
 	],
 	{
 		stdio: 'inherit'

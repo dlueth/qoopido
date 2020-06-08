@@ -4,9 +4,9 @@ import commonjs from '@rollup/plugin-commonjs';
 import buble from '@rollup/plugin-buble';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
-import { homepage } from '../package.json';
+import { homepage } from './package.json';
 
-const packages    = require('../../../shared/packages.js');
+const packages    = require('../../shared/packages.js');
 const matchSuffix = /\.(\w+)$/;
 const matchIndex = /\/index$/;
 const paths       = {
