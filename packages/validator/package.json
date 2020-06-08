@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/validator",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Validators against your daily dose of scratching your head about what the hell went wrong this time",
     "license": "MIT",
     "author": {
