@@ -1,4 +1,4 @@
-const matchCharacters = /[xy]/g;
+const matchToken = /[xy]/g;
 
 /**
  * Randomize UUID-characters
@@ -9,10 +9,10 @@ const matchCharacters = /[xy]/g;
  *
  * @ignore
  */
-function randomize(character) {
+function randomize(token) {
     const r = (Math.random() * 16) | 0;
 
-    return (character === "x" ? r : (r & 0x3) | 0x8).toString(16);
+    return (token === "x" ? r : (r & 0x3) | 0x8).toString(16);
 }
 
 /**
@@ -22,7 +22,7 @@ function randomize(character) {
  */
 export default function uuid() {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-        matchCharacters,
+        matchToken,
         randomize
     );
 }
