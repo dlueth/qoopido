@@ -8,6 +8,7 @@ export default [
     "src/isFunction.js",
     "src/isInstanceof.js",
     "src/isObject.js",
+    "src/isPositiveInteger.js",
     "src/isRegExp.js",
     "src/isSemver.js",
     "src/isString.js",

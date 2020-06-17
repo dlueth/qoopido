@@ -5,6 +5,7 @@ import isFalsy from "./isFalsy";
 import isString from "./isString";
 import isArray from "./isArray";
 import isObject from "./isObject";
+import isPositiveInteger from "./isPositiveInteger";
 import isSemver from "./isSemver";
 import isRegExp from "./isRegExp";
 import isThenable from "./isThenable";
@@ -17,6 +18,7 @@ export {
     isFalsy,
     isArray,
     isObject,
+    isPositiveInteger,
     isSemver,
     isRegExp,
     isThenable,

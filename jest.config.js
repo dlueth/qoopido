@@ -7,7 +7,10 @@ module.exports = {
     moduleNameMapper: {
         "@qoopido/(.+)$": "<rootDir>/packages/$1/src",
     },
-    modulePathIgnorePatterns: [ "dist/" ],
+    modulePathIgnorePatterns: [
+        "dist/",
+        "<rootDir>/packages/demand/"
+    ],
     testMatch: [ `<rootDir>/packages/*/src/**/*.test.js` ],
     collectCoverageFrom: [
         `<rootDir>/packages/*/src/**/*.js`,
