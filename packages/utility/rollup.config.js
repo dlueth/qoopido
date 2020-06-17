@@ -10,6 +10,7 @@ export default [
     "src/helper/doImmediate.js",
     "src/helper/forEach.js",
     "src/helper/hash.js",
+    "src/helper/merge.js",
     "src/helper/toArray.js",
     "src/helper/uuid.js",
 ].map((input) => configure({
