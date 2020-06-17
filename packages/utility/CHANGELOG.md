@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/dlueth/qoopido/compare/@qoopido/utility@1.1.2...@qoopido/utility@1.2.0) (2020-06-17)
+
+
+### Features
+
+* **utility:** add `helper/merge` function ([538e5e3](https://github.com/dlueth/qoopido/commit/538e5e3ae0769fcbd8e1c52a5b2f3bd0b624128a))
+
+
+
+
+
 ## [1.1.2](https://github.com/dlueth/qoopido/compare/@qoopido/utility@1.1.1...@qoopido/utility@1.1.2) (2020-06-17)
 
 **Note:** Version bump only for package @qoopido/utility
