@@ -3,7 +3,7 @@ import { isTypeof } from "@qoopido/validator";
 const arrayPrototypeSlice = Array.prototype.slice;
 
 /**
- * Convert an array-like-object to an array
+ * Convert an array-like object to an array
  *
  * @param {*} arrayLikeObject
  * @param {number} [start]

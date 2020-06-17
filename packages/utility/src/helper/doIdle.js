@@ -17,6 +17,14 @@ function requestIdleCallbackShim(callback, options) {
     }, options && options.timeout);
 }
 
-export default function doIdle(callback, delay) {
-    return requestIdleCallback(callback, { timeout: delay });
+/**
+ * Execute a callback function when system is idle
+ *
+ * @param {Function} callback
+ * @param {Number}   timeout
+ *
+ * @returns {Number}
+ */
+export default function doIdle(callback, timeout) {
+    return requestIdleCallback(callback, { timeout: timeout });
 }

@@ -5,7 +5,7 @@
  * @param {Function} callback
  * @param {*} [context]
  *
- * @return {Object}
+ * @returns {Object}
  */
 export default function forEach(source, callback, context) {
     const properties = Object.keys(source);
