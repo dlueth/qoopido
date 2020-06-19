@@ -8,6 +8,7 @@ module.exports = {
     displayName: name,
     name: name,
     rootDir: "../..",
+    projects: undefined,
     testMatch: [ `<rootDir>/packages/${dir}/src/**/*.test.js` ],
     collectCoverageFrom: [
         `<rootDir>/packages/${dir}/src/**/*.js`,
