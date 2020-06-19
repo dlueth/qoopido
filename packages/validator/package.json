@@ -20,8 +20,8 @@
     "scripts": {
         "lint": "eslint ./src",
         "lint:fix": "eslint --fix ./src",
-        "test": "node --experimental-worker ../../node_modules/.bin/jest",
-        "test:coverage": "node --experimental-worker ../../node_modules/.bin/jest --collectCoverage",
+        "test": "jest",
+        "test:coverage": "jest --collectCoverage",
         "build": "rollup -c"
     },
     "keywords": [
