@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/utility",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "description": "The swiss army knife of frequently used utility functions for your very own projects",
     "license": "MIT",
     "author": {
@@ -20,15 +20,15 @@
     "scripts": {
         "lint": "eslint ./src",
         "lint:fix": "eslint --fix ./src",
-        "test": "jest",
-        "test:coverage": "jest --collectCoverage",
+        "test": "node --experimental-worker ../../node_modules/.bin/jest",
+        "test:coverage": "node --experimental-worker ../../node_modules/.bin/jest --collectCoverage",
         "build": "rollup -c"
     },
     "keywords": [
         "utility"
     ],
     "dependencies": {
-        "@qoopido/validator": "^1.1.0"
+        "@qoopido/validator": "^1.2.0"
     },
     "publishConfig": {
         "access": "public"

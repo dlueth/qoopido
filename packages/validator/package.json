@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/validator",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Validators against your daily dose of scratching your head about what the hell went wrong this time",
     "license": "MIT",
     "author": {
@@ -20,8 +20,8 @@
     "scripts": {
         "lint": "eslint ./src",
         "lint:fix": "eslint --fix ./src",
-        "test": "jest",
-        "test:coverage": "jest --collectCoverage",
+        "test": "node --experimental-worker ../../node_modules/.bin/jest",
+        "test:coverage": "node --experimental-worker ../../node_modules/.bin/jest --collectCoverage",
         "build": "rollup -c"
     },
     "keywords": [
