@@ -1,0 +1,51 @@
+{
+    "name": "@qoopido/demand",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Promise like module loader using XHR requests and localStorage caching to dynamically load JavaScript and CSS + dynamic dependency resolution + support for custom handlers",
+    "license": "MIT",
+    "author": {
+        "name": "Dirk Lueth",
+        "email": "info@qoopido.com"
+    },
+    "homepage": "https://github.com/dlueth/qoopido/tree/master/packages/demand#readme",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/dlueth/qoopido.git"
+    },
+    "bugs": {
+        "url": "https://github.com/dlueth/qoopido/issues"
+    },
+    "main": "dist/index.js",
+    "module": "dist/esm/index.js",
+    "scripts": {
+        "lint": "eslint ./src",
+        "lint:fix": "eslint --fix ./src",
+        "test": "jest",
+        "test:coverage": "jest --collectCoverage",
+        "build": "rollup -c"
+    },
+    "keywords": [
+        "module",
+        "modular",
+        "script",
+        "loader",
+        "javascript",
+        "css",
+        "promise",
+        "xhr",
+        "ajax",
+        "localStorage",
+        "cache",
+        "caching",
+        "asset",
+        "storage",
+        "require",
+        "basket"
+    ],
+    "dependencies": {
+        "@qoopido/emitter": "^1.0.12",
+        "@qoopido/utility": "^1.2.0",
+        "@qoopido/validator": "^1.1.0"
+    }
+}

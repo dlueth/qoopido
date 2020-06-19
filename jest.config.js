@@ -9,7 +9,6 @@ module.exports = {
     },
     modulePathIgnorePatterns: [
         "dist/",
-        "<rootDir>/packages/demand/"
     ],
     testMatch: [ `<rootDir>/packages/*/src/**/*.test.js` ],
     collectCoverageFrom: [
