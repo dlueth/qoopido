@@ -7,6 +7,7 @@ import isArray from "./isArray";
 import isObject from "./isObject";
 import isPositiveInteger from "./isPositiveInteger";
 import isSemver from "./isSemver";
+import isTransferable from "./isTransferable";
 import isRegExp from "./isRegExp";
 import isThenable from "./isThenable";
 
@@ -20,6 +21,7 @@ export {
     isObject,
     isPositiveInteger,
     isSemver,
+    isTransferable,
     isRegExp,
     isThenable,
 };

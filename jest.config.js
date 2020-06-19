@@ -1,20 +1,21 @@
 module.exports = {
     verbose: true,
-    projects:
-    [
-            "<rootDir>/packages/*/jest.config.js"
+    projects: [
+        "<rootDir>/packages/*/jest.config.js"
     ],
     moduleNameMapper: {
         "@qoopido/(.+)$": "<rootDir>/packages/$1/src",
     },
     modulePathIgnorePatterns: [
         "dist/",
-        "<rootDir>/packages/demand/"
     ],
     testMatch: [ `<rootDir>/packages/*/src/**/*.test.js` ],
     collectCoverageFrom: [
         `<rootDir>/packages/*/src/**/*.js`,
         `!<rootDir>/packages/*/src/**/*.test.js`
+    ],
+    setupFiles: [
+        `<rootDir>/jest.setup.js`
     ],
     coverageDirectory: "<rootDir>/coverage/",
     coverageThreshold: {

@@ -11,6 +11,7 @@ export default [
     "src/isPositiveInteger.js",
     "src/isRegExp.js",
     "src/isSemver.js",
+    "src/isTransferable.js",
     "src/isString.js",
     "src/isThenable.js",
     "src/isTypeof.js",
