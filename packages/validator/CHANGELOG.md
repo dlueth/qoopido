@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/dlueth/qoopido/compare/@qoopido/validator@1.2.0...@qoopido/validator@1.3.0) (2020-06-22)
+
+
+### Features
+
+* **validator:** add `isTransferable` validation ([ffeb9c9](https://github.com/dlueth/qoopido/commit/ffeb9c92d55600b17d1f90814ac323b8ff032359))
+
+
+
+
+
 # [1.2.0](https://github.com/dlueth/qoopido/compare/@qoopido/validator@1.1.0...@qoopido/validator@1.2.0) (2020-06-19)
 
 
