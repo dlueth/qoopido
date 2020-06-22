@@ -13,9 +13,5 @@ module.exports = {
     collectCoverageFrom: [
         `<rootDir>/packages/${dir}/src/**/*.js`,
         `!<rootDir>/packages/${dir}/src/**/*.test.js`
-    ],
-    setupFiles: [
-        ...base.setupFiles,
-        `<rootDir>/packages/${dir}/jest.setup.js`
     ]
 };
