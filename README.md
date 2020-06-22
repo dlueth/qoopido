@@ -12,14 +12,17 @@ Lerna & Rollup based monorepo for all packages from @qoopido namespace
 1. [@qoopido/emitter](https://github.com/dlueth/qoopido/tree/master/packages/emitter):
 Ultra-flexible & dead simple event emitter supporting RegExp-based event subscription and global listeners
 
-2. [@qoopido/queue](https://github.com/dlueth/qoopido/tree/master/packages/queue):
-Simple & versatile queue with built-in event emitter
-
-3. [@qoopido/pledge](https://github.com/dlueth/qoopido/tree/master/packages/pledge):
+2. [@qoopido/pledge](https://github.com/dlueth/qoopido/tree/master/packages/pledge):
 Promises on steroids - capable of resolving and rejecting with multiple values
 
-4. [@qoopido/validator](https://github.com/dlueth/qoopido/tree/master/packages/validator):
+3. [@qoopido/queue](https://github.com/dlueth/qoopido/tree/master/packages/queue):
+Simple & versatile queue with built-in event emitter
+
+4. [@qoopido/task](https://github.com/dlueth/qoopido/tree/master/packages/task):
+Tiny package to offload any given function to a separate, async worker in its own thread
+
+5. [@qoopido/validator](https://github.com/dlueth/qoopido/tree/master/packages/validator):
 Validators against your daily dose of scratching your head about what the hell went wrong this time
 
-5. [@qoopido/utility](https://github.com/dlueth/qoopido/tree/master/packages/utility):
+6. [@qoopido/utility](https://github.com/dlueth/qoopido/tree/master/packages/utility):
 The swiss army knife of frequently used utility functions for your very own projects
