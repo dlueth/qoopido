@@ -7,8 +7,8 @@
  */
 export default function isTransferable(value) {
     return (
-        value instanceof ArrayBuffer ||
-        value instanceof MessagePort ||
+        ("ArrayBuffer" in self && value instanceof ArrayBuffer) ||
+        ("MessagePort" in self && value instanceof MessagePort) ||
         ("ImageBitmap" in self && value instanceof ImageBitmap)
     );
 }
