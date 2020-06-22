@@ -27,6 +27,6 @@ module.exports = {
         }
     },
     transform: {
-        "^.+\\.js$": "babel-jest"
+        "\\/packages\\/.+?\\/src\\/.+\\.js$": "babel-jest"
     },
 };
