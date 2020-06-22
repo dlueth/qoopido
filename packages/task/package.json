@@ -1,0 +1,42 @@
+{
+    "name": "@qoopido/task",
+    "version": "1.0.0",
+    "description": "Tiny package to offload any given function to a separate, async worker in its own thread",
+    "license": "MIT",
+    "author": {
+        "name": "Dirk Lueth",
+        "email": "info@qoopido.com"
+    },
+    "homepage": "https://github.com/dlueth/qoopido/tree/master/packages/task#readme",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/dlueth/qoopido.git"
+    },
+    "bugs": {
+        "url": "https://github.com/dlueth/qoopido/issues"
+    },
+    "main": "dist/index.js",
+    "module": "dist/esm/index.js",
+    "scripts": {
+        "lint": "eslint ./src",
+        "lint:fix": "eslint --fix ./src",
+        "test": "jest",
+        "test:coverage": "jest --collectCoverage",
+        "build": "rollup -c"
+    },
+    "keywords": [
+        "task",
+        "worker",
+        "async",
+        "thread",
+        "offload"
+    ],
+    "dependencies": {
+        "@qoopido/pledge": "^1.1.0",
+        "@qoopido/utility": "^1.3.0",
+        "@qoopido/validator": "^1.2.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
