@@ -7,8 +7,6 @@ if (typeof globalThis === "object" && globalThis.globalThis === globalThis) {
     result = self;
 } else if (typeof global === "object" && global.global === global) {
     result = global;
-} else {
-    result = this;
 }
 
 export default result;
