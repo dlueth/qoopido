@@ -1,0 +1,39 @@
+{
+    "name": "@qoopido/semver",
+    "version": "1.0.0",
+    "description": "Utility package to handle semver versions and compare them",
+    "license": "MIT",
+    "author": {
+        "name": "Dirk Lueth",
+        "email": "info@qoopido.com"
+    },
+    "homepage": "https://github.com/dlueth/qoopido/tree/master/packages/task#readme",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/dlueth/qoopido.git"
+    },
+    "bugs": {
+        "url": "https://github.com/dlueth/qoopido/issues"
+    },
+    "main": "dist/index.js",
+    "module": "dist/esm/index.js",
+    "scripts": {
+        "lint": "eslint ./src",
+        "lint:fix": "eslint --fix ./src",
+        "test": "jest",
+        "test:coverage": "jest --collectCoverage",
+        "build": "rollup -c"
+    },
+    "keywords": [
+        "semver",
+        "version",
+        "compare",
+        "utility"
+    ],
+    "dependencies": {
+        "@qoopido/validator": "^1.3.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
