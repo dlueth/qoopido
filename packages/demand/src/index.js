@@ -1,6 +1,6 @@
 import Emitter from "@qoopido/emitter";
 import { version } from "../package.json";
-import settings from "./singleton/settings";
+import settings from "./settings";
 
 export default function demand() {}
 

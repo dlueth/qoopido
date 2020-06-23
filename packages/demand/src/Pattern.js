@@ -1,5 +1,5 @@
 import { helper } from "@qoopido/utility";
-import resolveUrl from "../function/resolve/url";
+import resolveUrl from "./resolve/url";
 
 const matchTrailingSlash = /(.+)\/$/;
 

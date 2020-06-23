@@ -6,13 +6,13 @@ import {
     isSemver,
     isPositiveInteger,
 } from "@qoopido/validator";
-import Pattern from "../class/pattern";
+import Pattern from "./Pattern";
 import {
     STRING_BOOLEAN,
     STRING_STRING,
     EVENT_PRE_CONFIGURE,
     EVENT_POST_CONFIGURE,
-} from "../constant";
+} from "./constant";
 
 const settings = {};
 
