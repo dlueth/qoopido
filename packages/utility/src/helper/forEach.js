@@ -1,11 +1,11 @@
 /**
  * Iterate over enumerable & own properties of an array/object
  *
- * @param {Object} source
+ * @param {Iterable} source
  * @param {Function} callback
  * @param {*} [context]
  *
- * @returns {Object}
+ * @returns {*}
  */
 export default function forEach(source, callback, context) {
     const properties = Object.keys(source);
@@ -24,5 +24,5 @@ export default function forEach(source, callback, context) {
         }
     }
 
-    return source;
+    return context || source;
 }
