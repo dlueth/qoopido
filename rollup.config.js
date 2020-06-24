@@ -1,4 +1,5 @@
 import rimraf from 'rimraf';
+import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import buble from '@rollup/plugin-buble';
@@ -47,6 +48,7 @@ export function configureTemp(options) {
         ],
         external,
         plugins: [
+            json(),
             peerDepsExternal(),
             resolve(),
             commonjs(),
@@ -106,6 +108,7 @@ export function configure(options) {
 		],
 		external,
 		plugins: [
+            json(),
 			peerDepsExternal(),
 			resolve(),
 			commonjs(),
