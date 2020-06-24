@@ -185,8 +185,8 @@ export default class Pledge {
     /**
      * Attach separate onFulfill/onReject listener
      *
-     * @param {Function} onFulfill
-     * @param {Function} onReject
+     * @param {Function} [onFulfill]
+     * @param {Function} [onReject]
      *
      * @returns {Pledge}
      */
