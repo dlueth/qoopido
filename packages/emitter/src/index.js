@@ -14,25 +14,6 @@ import { isIdentifier } from "./validator/index";
 const weakmap = new WeakMap();
 
 /**
- * Initialize a weakmap for a given context
- *
- * @param {Emitter} context
- *
- * @returns {Emitter}
- *
- * @ignore
- */
-function initialize(context) {
-    weakmap.set(context, {
-        timestamp: +new Date(),
-        events: {},
-        expressions: [],
-    });
-
-    return context;
-}
-
-/**
  * Remove an event listener
  *
  * @param {Listener} listener
@@ -230,12 +211,16 @@ function retrieveListener(name) {
 /**
  * Class Emitter
  */
-class Emitter {
+export default class Emitter {
     /**
      * Constructor
      */
     constructor() {
-        initialize(this);
+        weakmap.set(this, {
+            timestamp: +new Date(),
+            events: {},
+            expressions: [],
+        });
     }
 
     /**
@@ -455,4 +440,8 @@ class Emitter {
     }
 }
 
-export default initialize(Emitter);
+weakmap.set(Emitter, {
+    timestamp: +new Date(),
+    events: {},
+    expressions: [],
+});
