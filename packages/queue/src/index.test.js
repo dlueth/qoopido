@@ -25,8 +25,8 @@ describe("get items()", () => {
 });
 
 describe("get current()", () => {
-    test("should return undefined on empty queue", () => {
-        expect(new Queue().current).toBe(void 0);
+    test("should return `null` on empty queue", () => {
+        expect(new Queue().current).toBe(null);
     });
 });
 
