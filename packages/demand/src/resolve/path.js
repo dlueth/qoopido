@@ -1,11 +1,24 @@
 import resolveUrl from "./url";
-import { isRelative, matchBase, matchParameter } from "../regex";
+import matchRelative from "../regex/matchRelative";
+import matchBase from "../regex/matchBase";
+import matchParameter from "../regex/matchParameter";
+import matchLeadingSlash from "../regex/matchLeadingSlash";
 
+/**
+ * Resolves a path from a given uri and context
+ *
+ * @param {String} uri
+ * @param {String} [context]
+ *
+ * @returns {String}
+ */
 export default function resolvePath(uri, context) {
-    let path = uri.replace(matchParameter, '');
+    let path = uri.replace(matchParameter, "");
 
-    if(isRelative.test(path)) {
-        path = '/' + resolveUrl(((context && resolveUrl(context + '/../')) || '/') + path).replace(matchBase, '');
+    if (matchRelative.test(path)) {
+        path = resolveUrl(
+            ((context && resolveUrl(context + "/../")) || "/") + path
+        ).replace(matchBase, matchLeadingSlash.test(context) ? "/" : "");
     }
 
     return path;

@@ -1,208 +1,321 @@
 import Pledge from "@qoopido/pledge";
+import Semver from "@qoopido/semver";
 import { helper } from "@qoopido/utility";
-import { isPositive } from "@qoopido/validator";
+import { isPositiveInteger } from "@qoopido/validator";
+import matchInternal from "./regex/matchInternal";
+import matchHandler from "./regex/matchHandler";
+import matchParameter from "./regex/matchParameter";
+import { DEFAULT_HANDLER, PATH_HANDLER, PREFIX_MOCK } from "./constant";
+import demand from "./demand";
+import registry from "./registry";
 import settings from "./settings";
-import { isRelative, matchBase, matchParameter } from "./regex";
-import { MOCK_PREFIX } from "./constant";
 import resolvePath from "./resolve/path";
 
-class Dependency {
+const weakmap = new WeakMap();
+const placeholder = [];
+
+/**
+ * Class Dependency
+ */
+export default class Dependency {
+    /**
+     * Constructor
+     *
+     * @param {String} uri
+     * @param {String} [context]
+     * @param {Boolean} [register=true]
+     */
     constructor(uri, context, register) {
-        var self      = this,
-            parameter = uri.match(matchParameter) || placeholder;
+        const parameter = uri.match(matchParameter) || placeholder;
+        const isInternal = context && matchInternal.test(uri);
+        const isMock = !!parameter[1];
+        const cache = parameter[2] ? parameter[1] === "+" : null;
+        const type = parameter[3] || DEFAULT_HANDLER;
+        const version = new Semver(parameter[4] || settings.version);
+        const lifetime =
+            (parameter[5] && parameter[5] * 1000) || settings.lifetime;
+        const path = resolvePath(uri, context);
+        const id = (isMock ? PREFIX_MOCK : "") + type + "!" + path;
+        const dfd = Pledge.defer();
+        const pledge = dfd.pledge;
+        let storage;
 
-        this.mock     = parameter[1] ? true : false;
-        this.cache    = parameter[2] ? parameter[1] === '+' : null;
-        this.type     = parameter[3] || settings.handler;
-        this.version  = new ClassSemver(parameter[4] || settings.version);
-        this.lifetime = (parameter[5] && parameter[5] * 1000) || settings.lifetime;
-        this.path     = resolvePath(uri, context);
-        this.id       = (this.mock ? MOCK_PREFIX : '' ) + this.type + '!' + this.path;
-        this.uri      = (this.mock ? MOCK_PREFIX : '' ) + this.type + '@' + this.version + (isPositive(this.lifetime) && this.lifetime > 0 ? '#' + this.lifetime : '' ) + '!' + this.path;
-        this.dfd      = Pledge.defer();
-        this.pledge   = this.dfd.pledge;
-        this.invalid  = false;
-
-        this.pledge.then(function() {
-            self.value = helper.toArray(arguments);
+        weakmap.set(this, {
+            isInternal: isInternal,
+            isMock: isMock,
+            isExpired: false,
+            handler: null,
+            value: null,
+            source: null, // set by Cache or Loader @TODO check if listening to an event is possible instead of having it from somewhere external
+            url: null, // optional, set by Loader @TODO check if listening to an event is possible instead of having it from somewhere external
+            cache: cache,
+            type: type,
+            version: version,
+            lifetime: lifetime,
+            path: path,
+            id: id,
+            uri:
+                (isMock ? PREFIX_MOCK : "") +
+                type +
+                "@" +
+                version +
+                (isPositiveInteger(lifetime) && lifetime > 0
+                    ? "#" + lifetime
+                    : "") +
+                "!" +
+                path,
+            dfd: dfd,
+            pledge: pledge,
         });
 
-        (register !== false) && registry.set(self.id, self);
+        storage = weakmap.get(this);
 
-        return self;
+        pledge.then(function () {
+            storage.value = helper.toArray(arguments);
+        });
+
+        if (!isInternal && !matchHandler.test(path)) {
+            demand(PATH_HANDLER + type)
+                .then(
+                    function (handler) {
+                        storage.handler = handler;
+
+                        if (isMock) {
+                            this.resolve(handler);
+                        }
+                    }.bind(this)
+                )
+                .catch(this.reject);
+        }
+
+        register !== false && registry.set(id, this);
+    }
+
+    /**
+     * Retrieve whether it is internal
+     *
+     * @returns {Boolean}
+     */
+    get isInternal() {
+        return weakmap.get(this).isInternal;
+    }
+
+    /**
+     * Retrieve whether it is a mock
+     *
+     * @returns {Boolean}
+     */
+    get isMock() {
+        return weakmap.get(this).isMock;
+    }
+
+    /**
+     * Retrieve whether the cache is expired
+     *
+     * @returns {Boolean}
+     */
+    get isExpired() {
+        return weakmap.get(this).isExpired;
+    }
+
+    /**
+     * Retrieve the handler
+     *
+     * @returns {Handler}
+     */
+    get handler() {
+        return weakmap.get(this).handler;
+    }
+
+    /**
+     * Retrieve the actual module
+     *
+     * @returns {*}
+     */
+    get value() {
+        return weakmap.get(this).value;
+    }
+
+    /**
+     * Retrieve the actual source
+     *
+     * @returns {String}
+     */
+    get source() {
+        return weakmap.get(this).source;
+    }
+
+    /**
+     * Retrieve the actual URL
+     *
+     * @returns {String}
+     */
+    get url() {
+        return weakmap.get(this).url;
+    }
+
+    /**
+     * Retrieve whether to cache
+     *
+     * @returns {Boolean}
+     */
+    get cache() {
+        return weakmap.get(this).cache;
+    }
+
+    /**
+     * Retrieve the type
+     *
+     * @returns {String}
+     */
+    get type() {
+        return weakmap.get(this).type;
+    }
+
+    /**
+     * Retrieve the version
+     *
+     * @returns {Semver}
+     */
+    get version() {
+        return weakmap.get(this).version;
+    }
+
+    /**
+     * Retrieve the cache lifetime
+     *
+     * @returns {Number}
+     */
+    get lifetime() {
+        return weakmap.get(this).lifetime;
+    }
+
+    /**
+     * Retrieve the path
+     *
+     * @returns {String}
+     */
+    get path() {
+        return weakmap.get(this).path;
+    }
+
+    /**
+     * Retrieve the ID
+     *
+     * @returns {String}
+     */
+    get id() {
+        return weakmap.get(this).id;
+    }
+
+    /**
+     * Retrieve the URI
+     *
+     * @returns {String}
+     */
+    get uri() {
+        return weakmap.get(this).uri;
+    }
+
+    /**
+     * Retrieve whether the state is settled
+     *
+     * @returns {Boolean}
+     */
+    get isSettled() {
+        return weakmap.get(this).pledge.isSettled;
+    }
+
+    /**
+     * Retrieve whether the state is pending
+     *
+     * @returns {Boolean}
+     */
+    get isPending() {
+        return weakmap.get(this).pledge.isPending;
+    }
+
+    /**
+     * Retrieve whether the state is resolved
+     *
+     * @returns {Boolean}
+     */
+    get isResolved() {
+        return weakmap.get(this).pledge.isResolved;
+    }
+
+    /**
+     * Retrieve whether the state is rejected
+     *
+     * @returns {Boolean}
+     */
+    get isRejected() {
+        return weakmap.get(this).pledge.isRejected;
+    }
+
+    /**
+     * Passthrough `then` to the actual pledge
+     *
+     * @returns {Pledge}
+     */
+    then() {
+        const pledge = weakmap.get(this).pledge;
+
+        return pledge.then.apply(pledge, arguments);
+    }
+
+    /**
+     * Passthrough `always` to the actual pledge
+     *
+     * @returns {Pledge}
+     */
+    always() {
+        const pledge = weakmap.get(this).pledge;
+
+        return pledge.always.apply(pledge, arguments);
+    }
+
+    /**
+     * Passthrough `finally` to the actual pledge
+     *
+     * @returns {Pledge}
+     */
+    finally() {
+        const pledge = weakmap.get(this).pledge;
+
+        return pledge.finally.apply(pledge, arguments);
+    }
+
+    /**
+     * Passthrough `catch` to the actual pledge
+     *
+     * @returns {Pledge}
+     */
+    catch() {
+        const pledge = weakmap.get(this).pledge;
+
+        return pledge.catch.apply(pledge, arguments);
+    }
+
+    /**
+     * Passthrough `resolve` to the actual deferred
+     *
+     * @returns {Function}
+     */
+    resolve() {
+        const dfd = weakmap.get(this).dfd;
+
+        return dfd.resolve.apply(dfd, arguments);
+    }
+
+    /**
+     * Passthrough `reject` to the actual deferred
+     *
+     * @returns {Function}
+     */
+    reject() {
+        const dfd = weakmap.get(this).dfd;
+
+        return dfd.reject.apply(dfd, arguments);
     }
 }
-
-var ClassDependency = (function() {
-    var PREFIX_INTERNAL = 'internal!',
-        registry        = new ClassRegistry(),
-        matchInternal   = /^(?:mock:|internal!)/i,
-        placeholder     = [];
-
-    function setProperty(property, value) {
-        this[property] = value;
-    }
-
-    function add(id) {
-        if(!matchInternal.test(id)) {
-            this.push(id);
-        }
-    }
-
-    function addPending(id, dependency) {
-        if(!matchInternal.test(id) && dependency.pledge.isPending()) {
-            this.push(id);
-        }
-    }
-
-    function addResolved(id, dependency) {
-        if(!matchInternal.test(id) && dependency.pledge.isResolved()) {
-            this.push(id);
-        }
-    }
-
-    function addRejected(id, dependency) {
-        if(!matchInternal.test(id) && dependency.pledge.isRejected()) {
-            this.push(id);
-        }
-    }
-
-    function list() {
-        return functionIterate(registry.get(), add, []);
-    }
-
-    list.pending = function() {
-        return functionIterate(registry.get(), addPending, []);
-    };
-
-    list.resolved = function() {
-        return functionIterate(registry.get(), addResolved, []);
-    };
-
-    list.rejected = function() {
-        return functionIterate(registry.get(), addRejected, []);
-    };
-
-    function ClassDependency(uri, context, register) {
-        var self      = this,
-            parameter = uri.match(regexMatchParameter) || placeholder;
-
-        self.path     = functionResolvePath(uri, context);
-        self.mock     = parameter[1] ? true : false;
-        self.cache    = parameter[2] ? parameter[1] === '+' : null;
-        self.type     = parameter[3] || settings.handler;
-        self.version  = new ClassSemver(parameter[4] || settings.version);
-        self.lifetime = (parameter[5] && parameter[5] * 1000) || settings.lifetime;
-        self.id       = (self.mock ? MOCK_PREFIX : '' ) + self.type + '!' + self.path;
-        self.uri      = (self.mock ? MOCK_PREFIX : '' ) + self.type + '@' + self.version + (validatorIsPositive(self.lifetime) && self.lifetime > 0 ? '#' + self.lifetime : '' ) + '!' + self.path;
-        self.dfd      = ClassPledge.defer();
-        self.pledge   = self.dfd.pledge;
-        self.invalid  = false;
-
-        self.pledge.then(function() {
-            self.value = functionToArray(arguments);
-        });
-
-        (register !== false) && registry.set(self.id, self);
-
-        return self;
-    }
-
-    ClassDependency.prototype = {
-        enqueue: true // handled by handler
-        /* only for reference
-         path:     null,
-         mock:     null,
-        cache:    null,
-        type:     null,
-        version:  null,
-        lifetime: null,
-         id:       null,
-         uri:      null,
-        dfd:      null,
-        pledge:   null,
-        value:    null,
-        handler:  null, // set by Dependency.resolve
-         source:   null, // set by Cache or Loader
-         url:      null, // optional, set by Loader
-        */
-    };
-
-    ClassDependency.get = function(uri, context) {
-        return registry.get(functionResolveId(uri, context));
-    };
-
-    ClassDependency.resolve = function(uri, context) {
-        var isInternal = context && regexMatchInternal.test(uri),
-            dependency = isInternal ? this.get(PREFIX_INTERNAL + context + '/' + uri) : this.get(uri, context),
-            value;
-
-        if(!dependency) {
-            if(isInternal) {
-                dependency = new ClassDependency(PREFIX_INTERNAL + context + '/' + uri);
-
-                switch(uri) {
-                    case DEMAND_ID:
-                        value = (function() {
-                            return functionIterate(demand, setProperty, demand.bind(context));
-                        }());
-
-                        break;
-                    case PROVIDE_ID:
-                        value = provide.bind(context);
-
-                        break;
-                    case PATH_ID:
-                        value = context;
-
-                        break;
-                    case EXPORTS_ID:
-                        value = {};
-
-                        dependency.dfd.pledge
-                            .then(this.get(context).dfd.resolve);
-
-                        break;
-                }
-
-                dependency.dfd.resolve(value);
-            } else {
-                dependency = new ClassDependency(uri, context);
-
-                demand(MODULE_PREFIX_HANDLER + dependency.type)
-                    .then(
-                        function(handler) {
-                            dependency.handler = handler;
-
-                            if(dependency.mock) {
-                                dependency.dfd.resolve(handler);
-                            } else {
-                                singletonCache.resolve(dependency);
-                            }
-                        },
-                        function() {
-                            dependency.dfd.reject(new ClassFailure(ERROR_LOAD + ' (handler)', self.id));
-                        }
-                    )
-            }
-        }
-
-        return dependency;
-    };
-
-    ClassDependency.remove = function(uri, context, cache) {
-        var id   = functionResolveId(uri, context),
-            node = document.querySelector('[' + DEMAND_ID + '-id="' + id + '"]');
-
-        registry.remove(id);
-        registry.remove(MOCK_PREFIX + id);
-
-        node && node.parentNode.removeChild(node);
-
-        (cache !== false) && singletonCache.clear(id);
-    };
-
-    ClassDependency.list = list;
-
-    return ClassDependency;
-}());

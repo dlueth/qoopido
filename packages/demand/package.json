@@ -21,8 +21,8 @@
     "scripts": {
         "lint": "eslint ./src",
         "lint:fix": "eslint --fix ./src",
-        "test": "node --experimental-worker ../../node_modules/.bin/jest",
-        "test:coverage": "node --experimental-worker ../../node_modules/.bin/jest --collectCoverage",
+        "test": "jest",
+        "test:coverage": "jest --collectCoverage",
         "build": "rollup -c"
     },
     "keywords": [
@@ -45,7 +45,9 @@
     ],
     "dependencies": {
         "@qoopido/emitter": "^1.0.12",
+        "@qoopido/global": "^1.0.1",
         "@qoopido/pledge": "^1.1.0",
+        "@qoopido/queue": "^1.1.1",
         "@qoopido/semver": "^1.0.2",
         "@qoopido/task": "^1.1.0",
         "@qoopido/utility": "^1.2.0",

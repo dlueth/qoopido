@@ -4,27 +4,61 @@ import {
     isTypeof,
     isObject,
     isSemver,
+    isString,
     isPositiveInteger,
 } from "@qoopido/validator";
 import Pattern from "./Pattern";
 import {
     STRING_BOOLEAN,
-    STRING_STRING,
     EVENT_PRE_CONFIGURE,
     EVENT_POST_CONFIGURE,
 } from "./constant";
 
-const settings = {};
+const settings = {
+    version: "1.0.0",
+    cache: {},
+    timeout: 8000,
+    pattern: {},
+    modules: {},
+};
 
+/**
+ * Process a cache string into a corresponding object
+ *
+ * @param {String} value
+ * @param {String} key
+ *
+ * @this Object.<String|Object>
+ *
+ * @ignore
+ */
 function processCache(value, key) {
     this[key] = { weight: key.length, state: value };
 }
 
+/**
+ * Process a pattern string into an instance of Pattern
+ *
+ * @param {String} value
+ * @param {String} key
+ *
+ * @this Object.<String|Object>
+ *
+ * @ignore
+ */
 function processPattern(value, key) {
     key !== "base" && (this[key] = new Pattern(key, value));
 }
 
+/**
+ * Class Settings
+ */
 class Settings extends Emitter {
+    /**
+     * Update settings
+     *
+     * @param {Object} options
+     */
     update(options) {
         if (isTypeof(options.cache, STRING_BOOLEAN)) {
             settings.cache[""] = { weight: 0, state: options.cache };
@@ -36,11 +70,6 @@ class Settings extends Emitter {
             settings.version = options.version;
         }
 
-        // @TODO check if necessary, name seems misleading
-        if (isPositiveInteger(options.delay)) {
-            settings.delay = options.delay * 1000;
-        }
-
         if (isPositiveInteger(options.timeout)) {
             settings.timeout =
                 Math.min(Math.max(options.timeout, 2), 20) * 1000;
@@ -50,7 +79,7 @@ class Settings extends Emitter {
             settings.lifetime = options.lifetime * 1000;
         }
 
-        if (isTypeof(options.base, STRING_STRING) && options.base !== "") {
+        if (isString(options.base) && options.base !== "") {
             settings.pattern.base = new Pattern("", options.base);
         }
 
@@ -74,6 +103,15 @@ class Settings extends Emitter {
                 this
             );
         }
+    }
+
+    /**
+     * Retrieve version
+     *
+     * @returns {String}
+     */
+    get version() {
+        return settings.version;
     }
 }
 
