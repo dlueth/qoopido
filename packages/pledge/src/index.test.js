@@ -626,8 +626,10 @@ describe("Pledge.all()", () => {
 
     test("should resolve when all pledges did resolve", () => {
         return new Promise((resolve, reject) => {
+            const now = performance.now();
             const callback = jest.fn();
             const pledge = Pledge.all([
+                Pledge.resolve(now),
                 Pledge.resolve(1, 2),
                 new Pledge((resolve) => {
                     setTimeout(() => {
@@ -640,9 +642,12 @@ describe("Pledge.all()", () => {
                 try {
                     expect(pledge.isResolved).toBe(true);
                     expect(callback.mock.calls.length).toBe(1);
-                    expect(callback.mock.calls[0].length).toBe(2);
-                    expect(callback.mock.calls[0][0]).toEqual([1, 2]);
-                    expect(callback.mock.calls[0][1]).toEqual([3, 4]);
+                    expect(callback.mock.calls[0].length).toBe(5);
+                    expect(callback.mock.calls[0][0]).toEqual(now);
+                    expect(callback.mock.calls[0][1]).toEqual(1);
+                    expect(callback.mock.calls[0][2]).toEqual(2);
+                    expect(callback.mock.calls[0][3]).toEqual(3);
+                    expect(callback.mock.calls[0][4]).toEqual(4);
 
                     resolve();
                 } catch (error) {
@@ -652,7 +657,7 @@ describe("Pledge.all()", () => {
         });
     });
 
-    test("should reject when any pledge gets rejected", () => {
+    test("should reject when any pledge gets rejected and everything is settled", () => {
         return new Promise((resolve, reject) => {
             const callback = jest.fn(() => {
                 return Pledge.reject();
@@ -675,9 +680,11 @@ describe("Pledge.all()", () => {
                 try {
                     expect(pledge.isRejected).toBe(true);
                     expect(callback.mock.calls.length).toBe(1);
-                    expect(callback.mock.calls[0].length).toBe(2);
-                    expect(callback.mock.calls[0][0]).toEqual([3, 4]);
-                    expect(callback.mock.calls[0][1]).toEqual([1, 2]);
+                    expect(callback.mock.calls[0].length).toBe(4);
+                    expect(callback.mock.calls[0][0]).toEqual(3);
+                    expect(callback.mock.calls[0][1]).toEqual(4);
+                    expect(callback.mock.calls[0][2]).toEqual(1);
+                    expect(callback.mock.calls[0][3]).toEqual(2);
 
                     resolve();
                 } catch (error) {

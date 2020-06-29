@@ -3,6 +3,8 @@ import { helper } from "@qoopido/utility";
 import { ERROR_PLEDGES_NO_ARRAY } from "../constant";
 import Deferred from "./deferred";
 
+const concat = Array.prototype.concat;
+
 /**
  * Observe the state of a pledge
  *
@@ -38,9 +40,15 @@ function observe(pledge, index, observer) {
  */
 function check(observer) {
     if (observer.count === observer.total) {
-        observer.deferred.resolve.apply(null, [].concat(observer.resolved));
+        observer.deferred.resolve.apply(
+            null,
+            concat.apply([], observer.resolved)
+        );
     } else if (observer.rejected.length + observer.count === observer.total) {
-        observer.deferred.reject.apply(null, [].concat(observer.rejected));
+        observer.deferred.reject.apply(
+            null,
+            concat.apply([], observer.rejected)
+        );
     }
 }
 
