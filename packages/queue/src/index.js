@@ -32,7 +32,9 @@ export default class Queue extends Emitter {
      * Current item of the queue
      */
     get current() {
-        return weakmap.get(this)[0] || null;
+        const storage = weakmap.get(this);
+
+        return storage.length > 0 ? storage[0] : null;
     }
 
     /**
