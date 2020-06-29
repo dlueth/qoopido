@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/dlueth/qoopido/compare/@qoopido/queue@1.1.1...@qoopido/queue@1.1.2) (2020-06-29)
+
+
+### Bug Fixes
+
+* **queue:** fix bug in `@qoopido/queue` where getting `current` might have caused errors ([636b10f](https://github.com/dlueth/qoopido/commit/636b10f240f67e4ddd742533994f7d45174f583f))
+
+
+
+
+
 ## [1.1.1](https://github.com/dlueth/qoopido/compare/@qoopido/queue@1.1.0...@qoopido/queue@1.1.1) (2020-06-22)
 
 **Note:** Version bump only for package @qoopido/queue
