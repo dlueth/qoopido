@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/dlueth/qoopido/compare/@qoopido/pledge@1.1.1...@qoopido/pledge@2.0.0) (2020-06-29)
+
+
+### Features
+
+* **pledge:** change `Pledge.all` resolution behaviour to expand all values ([3f915e6](https://github.com/dlueth/qoopido/commit/3f915e6f1f6401e3a38dcaa91c90e24a2ab9fad1))
+
+
+### BREAKING CHANGES
+
+* **pledge:** Instead of resolve/reject with arrays for the involved pledges those will now get
+expanded as separate arguments to the callback
+
+
+
+
+
 ## [1.1.1](https://github.com/dlueth/qoopido/compare/@qoopido/pledge@1.1.0...@qoopido/pledge@1.1.1) (2020-06-22)
 
 **Note:** Version bump only for package @qoopido/pledge

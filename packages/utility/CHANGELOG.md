@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/dlueth/qoopido/compare/@qoopido/utility@1.3.1...@qoopido/utility@2.0.0) (2020-06-29)
+
+
+### Features
+
+* **utility:** make `helper/forEach` return context instead of source, if given ([67a3222](https://github.com/dlueth/qoopido/commit/67a3222b476d8ae6fa581ec0b5ad42974e298baa))
+
+
+### BREAKING CHANGES
+
+* **utility:** As return value is changed when context is passed this can potentially break
+existing code.
+
+
+
+
+
 ## [1.3.1](https://github.com/dlueth/qoopido/compare/@qoopido/utility@1.3.0...@qoopido/utility@1.3.1) (2020-06-22)
 
 **Note:** Version bump only for package @qoopido/utility
