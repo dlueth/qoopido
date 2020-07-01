@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/dlueth/qoopido/compare/@qoopido/utility@2.0.0...@qoopido/utility@2.0.1) (2020-07-01)
+
+
+### Bug Fixes
+
+* **utility:** add `isMergeableObject` to `helper/merge` to prevent merging of RegExp and Date ([85acc36](https://github.com/dlueth/qoopido/commit/85acc36fddf27a7d1bad596605f3eb867c6b2e28))
+
+
+
+
+
 # [2.0.0](https://github.com/dlueth/qoopido/compare/@qoopido/utility@1.3.1...@qoopido/utility@2.0.0) (2020-06-29)
 
 

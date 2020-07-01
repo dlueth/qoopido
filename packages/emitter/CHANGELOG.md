@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/dlueth/qoopido/compare/@qoopido/emitter@1.1.2...@qoopido/emitter@1.1.3) (2020-07-01)
+
+**Note:** Version bump only for package @qoopido/emitter
+
+
+
+
+
 ## [1.1.2](https://github.com/dlueth/qoopido/compare/@qoopido/emitter@1.1.1...@qoopido/emitter@1.1.2) (2020-06-29)
 
 **Note:** Version bump only for package @qoopido/emitter
