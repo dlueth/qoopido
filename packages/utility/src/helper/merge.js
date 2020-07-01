@@ -1,6 +1,21 @@
 import { isObject, isArray } from "@qoopido/validator";
 import forEach from "./forEach";
 
+const toString = Object.prototype.toString;
+
+/**
+ * Determine if a given value is a mergeable object
+ *
+ * @param {*} value
+ *
+ * @returns {Boolean}
+ *
+ * @ignore
+ */
+function isMergeableObject(value) {
+    return isObject(value) && !(toString.call(value) === '[object RegExp]') && !(toString.call(value) === '[object Date]');
+}
+
 /**
  * Handle merge object keys/values
  *
@@ -22,7 +37,7 @@ function mergeKeys(value, key) {
         return;
     }
 
-    if (isObject(value) && isObject(this[key])) {
+    if (isMergeableObject(value) && isMergeableObject(this[key])) {
         this[key] = merge(target, value);
 
         return;
