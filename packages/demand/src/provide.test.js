@@ -1,4 +1,4 @@
-import "./handler/module";
+import "./Handler/Module";
 import registry from "./registry";
 import provide from "./provide";
 

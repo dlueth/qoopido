@@ -1,6 +1,6 @@
 import Pledge from "@qoopido/pledge";
 import global from "@qoopido/global";
-import handlerModule from "./handler/module";
+import HandlerModule from "./Handler/Module";
 import demand from "./demand";
 
 describe("demand()", () => {
@@ -18,8 +18,8 @@ describe("demand()", () => {
             )
                 .then(function (module1, module2) {
                     expect(arguments.length).toBe(2);
-                    expect(module1).toBe(handlerModule);
-                    expect(module2).toBe(handlerModule);
+                    expect(module1 instanceof HandlerModule).toBe(true);
+                    expect(module2 instanceof HandlerModule).toBe(true);
 
                     resolve();
                 })
@@ -54,8 +54,8 @@ describe("demand()", () => {
                 )
                 .then(function (module1, module2) {
                     expect(arguments.length).toBe(2);
-                    expect(module1).toBe(handlerModule);
-                    expect(module2).toBe(handlerModule);
+                    expect(module1 instanceof HandlerModule).toBe(true);
+                    expect(module2 instanceof HandlerModule).toBe(true);
 
                     resolve();
                 })
@@ -64,13 +64,13 @@ describe("demand()", () => {
             demand
                 .call(
                     "@qoopido/demand/",
-                    "./handler/module",
+                    "./Handler/Module",
                     "@qoopido/demand/handler/module"
                 )
                 .then(function (module1, module2) {
                     expect(arguments.length).toBe(2);
-                    expect(module1).toBe(handlerModule);
-                    expect(module2).toBe(handlerModule);
+                    expect(module1 instanceof HandlerModule).toBe(true);
+                    expect(module2 instanceof HandlerModule).toBe(true);
 
                     resolve();
                 })
