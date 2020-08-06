@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/dlueth/qoopido/compare/@qoopido/pledge@2.0.1...@qoopido/pledge@2.0.2) (2020-08-06)
+
+**Note:** Version bump only for package @qoopido/pledge
+
+
+
+
+
 ## [2.0.1](https://github.com/dlueth/qoopido/compare/@qoopido/pledge@2.0.0...@qoopido/pledge@2.0.1) (2020-07-01)
 
 **Note:** Version bump only for package @qoopido/pledge
