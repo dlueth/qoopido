@@ -13,7 +13,11 @@ const toString = Object.prototype.toString;
  * @ignore
  */
 function isMergeableObject(value) {
-    return isObject(value) && !(toString.call(value) === '[object RegExp]') && !(toString.call(value) === '[object Date]');
+    return (
+        isObject(value) &&
+        !(toString.call(value) === "[object RegExp]") &&
+        !(toString.call(value) === "[object Date]")
+    );
 }
 
 /**
