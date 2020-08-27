@@ -118,6 +118,8 @@ export default class Semver {
         this.minor = parts.shift();
         this.patch = parts.shift();
         this.identifier = parts;
+
+        return this;
     }
 
     /**
