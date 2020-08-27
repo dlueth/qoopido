@@ -19,6 +19,8 @@ export default class Queue extends Emitter {
         super();
 
         weakmap.set(this, items ? [].concat(items) : []);
+
+        return this;
     }
 
     /**
