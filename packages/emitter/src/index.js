@@ -221,6 +221,8 @@ export default class Emitter {
             events: {},
             expressions: [],
         });
+
+        return this;
     }
 
     /**
