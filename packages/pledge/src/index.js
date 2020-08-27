@@ -123,16 +123,14 @@ export default class Pledge {
      * @param {Function} executor
      */
     constructor(executor) {
-        const self = this;
-
         if (!isFunction(executor)) {
             throw new TypeError(ERROR_EXECUTOR_NO_FUNCTION);
         }
 
-        weakmap.set(self, {
+        weakmap.set(this, {
             state: STATE_PENDING,
             settled: false,
-            handle: handle.bind(self),
+            handle: handle.bind(this),
             value: null,
             resolved: [],
             rejected: [],
@@ -140,10 +138,12 @@ export default class Pledge {
         });
 
         try {
-            executor(resolve.bind(self), reject.bind(self));
+            executor(resolve.bind(this), reject.bind(this));
         } catch (error) {
-            reject.call(self, error);
+            reject.call(this, error);
         }
+
+        return this;
     }
 
     /**
