@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/pledge",
-    "version": "2.0.2",
+    "version": "2.1.0",
     "description": "Promises on steroids - capable of resolving and rejecting with multiple values",
     "license": "MIT",
     "author": {

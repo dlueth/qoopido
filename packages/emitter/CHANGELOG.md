@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/dlueth/qoopido/compare/@qoopido/emitter@1.1.4...@qoopido/emitter@1.2.0) (2020-08-27)
+
+
+### Features
+
+* **emitter:** change constructor to return context for convenience ([188d969](https://github.com/dlueth/qoopido/commit/188d96971e87e94017467a95ab682a5ff9eef326))
+
+
+
+
+
 ## [1.1.4](https://github.com/dlueth/qoopido/compare/@qoopido/emitter@1.1.3...@qoopido/emitter@1.1.4) (2020-08-06)
 
 **Note:** Version bump only for package @qoopido/emitter

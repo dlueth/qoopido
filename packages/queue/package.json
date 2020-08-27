@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/queue",
-    "version": "1.1.4",
+    "version": "1.2.0",
     "description": "Simple & versatile queue with built-in event emitter",
     "license": "MIT",
     "author": {
@@ -28,7 +28,7 @@
         "queue"
     ],
     "dependencies": {
-        "@qoopido/emitter": "^1.1.4",
+        "@qoopido/emitter": "^1.2.0",
         "@qoopido/utility": "^2.0.2"
     },
     "publishConfig": {

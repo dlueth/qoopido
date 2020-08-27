@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/dlueth/qoopido/compare/@qoopido/pledge@2.0.2...@qoopido/pledge@2.1.0) (2020-08-27)
+
+
+### Features
+
+* **pledge:** change constructor to return context for convenience ([96b4bf7](https://github.com/dlueth/qoopido/commit/96b4bf7119a6bed4ca5ef45ef58aa5212639e769))
+
+
+
+
+
 ## [2.0.2](https://github.com/dlueth/qoopido/compare/@qoopido/pledge@2.0.1...@qoopido/pledge@2.0.2) (2020-08-06)
 
 **Note:** Version bump only for package @qoopido/pledge
