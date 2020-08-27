@@ -42,6 +42,8 @@ export default class {
 
             delete deferred[uuid];
         };
+
+        return this;
     }
 
     /**
