@@ -1,6 +1,6 @@
 {
     "name": "@qoopido/task",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Tiny package to offload any given function to a separate, async worker in its own thread",
     "license": "MIT",
     "author": {
@@ -32,7 +32,7 @@
         "offload"
     ],
     "dependencies": {
-        "@qoopido/pledge": "^2.1.0",
+        "@qoopido/pledge": "^2.1.1",
         "@qoopido/utility": "^2.0.2",
         "@qoopido/validator": "^1.3.0"
     },

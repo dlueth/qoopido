@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/dlueth/qoopido/compare/@qoopido/pledge@2.1.0...@qoopido/pledge@2.1.1) (2020-09-03)
+
+
+### Bug Fixes
+
+* **pledge:** enable usage of `thenables` instead of `Pledge` only when chaining ([a730305](https://github.com/dlueth/qoopido/commit/a730305b8371e1ccc52a3153b002a351a75e179b))
+
+
+
+
+
 # [2.1.0](https://github.com/dlueth/qoopido/compare/@qoopido/pledge@2.0.2...@qoopido/pledge@2.1.0) (2020-08-27)
 
 
