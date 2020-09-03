@@ -1,9 +1,4 @@
-import {
-    isInstanceof,
-    isTypeof,
-    isFunction,
-    isArray,
-} from "@qoopido/validator";
+import { isThenable, isTypeof, isFunction, isArray } from "@qoopido/validator";
 import { helper } from "@qoopido/utility";
 import {
     ERROR_EXECUTOR_NO_FUNCTION,
@@ -91,7 +86,7 @@ function handle(parameter) {
         try {
             result = pointer.handler.apply(null, properties.value);
 
-            if (isInstanceof(result, Pledge)) {
+            if (isThenable(result)) {
                 result.then(pointer.dfd.resolve, pointer.dfd.reject);
 
                 continue;
