@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/dlueth/qoopido/compare/@qoopido/task@1.2.1...@qoopido/task@2.0.0) (2020-09-18)
+
+
+### Bug Fixes
+
+* **task:** fix bug where `@qoopido/task` failed on concurrent tasks ([a31596a](https://github.com/dlueth/qoopido/commit/a31596a43fc659648cef1fc94e19cbefdebce09e)), closes [#2](https://github.com/dlueth/qoopido/issues/2)
+
+
+### BREAKING CHANGES
+
+* **task:** renamed the export of `@qoopido/utility/helper/uuid` from `Uuid` to `uuid`
+
+
+
+
+
 ## [1.2.1](https://github.com/dlueth/qoopido/compare/@qoopido/task@1.2.0...@qoopido/task@1.2.1) (2020-09-03)
 
 **Note:** Version bump only for package @qoopido/task
