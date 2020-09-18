@@ -55,7 +55,7 @@ export default class {
      */
     execute() {
         const dfd = Pledge.defer();
-        const uuid = new helper.Uuid();
+        const uuid = helper.uuid();
         const args = helper.toArray(arguments);
 
         deferred[uuid] = dfd;
