@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/dlueth/qoopido/compare/@qoopido/emitter@1.2.1...@qoopido/emitter@1.3.0) (2021-02-17)
+
+
+### Features
+
+* **emitter:** allow emitter instances to optionally be non-global ([f9604a9](https://github.com/dlueth/qoopido/commit/f9604a93e240dde4aa00f4b0580468e732d2dbb3))
+
+
+
+
+
 ## [1.2.1](https://github.com/dlueth/qoopido/compare/@qoopido/emitter@1.2.0...@qoopido/emitter@1.2.1) (2020-09-18)
 
 **Note:** Version bump only for package @qoopido/emitter
