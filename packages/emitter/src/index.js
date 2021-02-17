@@ -192,7 +192,7 @@ function retrieveListener(name) {
 
         listener = storage.events[name] ? storage.events[name].slice() : [];
 
-        if (this !== Emitter) {
+        if (storage.global && this !== Emitter) {
             listener = listener.concat(retrieveListener.call(Emitter, name));
         }
 
@@ -214,9 +214,11 @@ function retrieveListener(name) {
 export default class Emitter {
     /**
      * Constructor
+     * @param {Boolean} global
      */
-    constructor() {
+    constructor(global) {
         weakmap.set(this, {
+            global: !(global === false),
             timestamp: +new Date(),
             events: {},
             expressions: [],

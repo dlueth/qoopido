@@ -84,6 +84,29 @@ describe("emit()", () => {
         });
     });
 
+    test("should not execute broadcast listeners for non global emitters", () => {
+        return new Promise((resolve, reject) => {
+            const emitter = new Emitter(false);
+            const unique = (+new Date()).toString();
+            const listener = jest.fn();
+
+            Emitter.on(unique, listener);
+
+            emitter
+                .emit(unique, "param_first", "param_second");
+
+            setTimeout(() => {
+                try {
+                    expect(listener.mock.calls.length).toBe(0);
+
+                    resolve();
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        });
+    });
+
     test("should correctly cancel an event", () => {
         return new Promise((resolve, reject) => {
             const emitter = new Emitter();
