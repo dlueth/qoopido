@@ -92,8 +92,7 @@ describe("emit()", () => {
 
             Emitter.on(unique, listener);
 
-            emitter
-                .emit(unique, "param_first", "param_second");
+            emitter.emit(unique, "param_first", "param_second");
 
             setTimeout(() => {
                 try {
