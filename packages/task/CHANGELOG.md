@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/dlueth/qoopido/compare/@qoopido/task@2.0.0...@qoopido/task@2.0.1) (2021-05-18)
+
+**Note:** Version bump only for package @qoopido/task
+
+
+
+
+
 # [2.0.0](https://github.com/dlueth/qoopido/compare/@qoopido/task@1.2.1...@qoopido/task@2.0.0) (2020-09-18)
 
 

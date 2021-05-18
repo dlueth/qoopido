@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/dlueth/qoopido/compare/@qoopido/utility@3.0.0...@qoopido/utility@3.0.1) (2021-05-18)
+
+**Note:** Version bump only for package @qoopido/utility
+
+
+
+
+
 # [3.0.0](https://github.com/dlueth/qoopido/compare/@qoopido/utility@2.0.2...@qoopido/utility@3.0.0) (2020-09-18)
 
 

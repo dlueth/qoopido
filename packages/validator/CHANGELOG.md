@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/dlueth/qoopido/compare/@qoopido/validator@1.3.0...@qoopido/validator@1.3.1) (2021-05-18)
+
+**Note:** Version bump only for package @qoopido/validator
+
+
+
+
+
 # [1.3.0](https://github.com/dlueth/qoopido/compare/@qoopido/validator@1.2.0...@qoopido/validator@1.3.0) (2020-06-22)
 
 
