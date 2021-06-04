@@ -1,22 +1,20 @@
-import global from "../constant/global";
-
-const _setImmediate = global.setImmediate;
-const _MutationObserver = global.MutationObserver;
-const _document = global.document;
+const _setImmediate = globalThis.setImmediate || globalThis.setTimeout;
+const _MutationObserver = globalThis.MutationObserver;
+const _document = globalThis.document;
 
 describe("doImmediate()", () => {
     beforeEach(() => {
         jest.resetModules();
 
-        global.setImmediate = _setImmediate;
-        global.MutationObserver = _MutationObserver;
-        global.document = _document;
+        globalThis.setImmediate = _setImmediate;
+        globalThis.MutationObserver = _MutationObserver;
+        globalThis.document = _document;
     });
 
     test("should successfully call the callback (setImmediate)", () => {
         return new Promise((resolve, reject) => {
-            global.MutationObserver = undefined;
-            global.document = undefined;
+            globalThis.MutationObserver = undefined;
+            globalThis.document = undefined;
 
             const doImmediate = require("./doImmediate").default;
             const callback = jest.fn();
@@ -37,7 +35,7 @@ describe("doImmediate()", () => {
 
     test("should successfully call the callback (MutationObserver)", () => {
         return new Promise((resolve, reject) => {
-            global.setImmediate = undefined;
+            globalThis.setImmediate = undefined;
 
             const doImmediate = require("./doImmediate").default;
             const callback = jest.fn();
@@ -58,9 +56,9 @@ describe("doImmediate()", () => {
 
     test("should successfully call the callback (setTimeout)", () => {
         return new Promise((resolve, reject) => {
-            global.setImmediate = undefined;
-            global.MutationObserver = undefined;
-            global.document = undefined;
+            globalThis.setImmediate = undefined;
+            globalThis.MutationObserver = undefined;
+            globalThis.document = undefined;
 
             const doImmediate = require("./doImmediate").default;
             const callback = jest.fn();

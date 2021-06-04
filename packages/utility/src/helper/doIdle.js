@@ -1,7 +1,5 @@
-import global from "../constant/global";
-
 const requestIdleCallback =
-    ("requestIdleCallback" in global && global.requestIdleCallback) ||
+    ("requestIdleCallback" in globalThis && globalThis.requestIdleCallback) ||
     requestIdleCallbackShim;
 
 function requestIdleCallbackShim(callback, options) {

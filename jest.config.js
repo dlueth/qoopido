@@ -29,4 +29,5 @@ module.exports = {
     transform: {
         "\\/packages\\/.+?\\/src\\/.+\\.js$": "babel-jest"
     },
+    testEnvironment: 'jsdom',
 };

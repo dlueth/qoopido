@@ -1,15 +1,14 @@
 import { isFunction, isObject } from "@qoopido/validator";
 import forEach from "./forEach";
-import global from "../constant/global";
 import uuid from "./uuid";
 
 let strategy;
 
-if ("setImmediate" in global && isFunction(setImmediate)) {
+if ("setImmediate" in globalThis && isFunction(setImmediate)) {
     strategy = setImmediate;
 } else if (
-    "MutationObserver" in global &&
-    "document" in global &&
+    "MutationObserver" in globalThis &&
+    "document" in globalThis &&
     isFunction(MutationObserver) &&
     isObject(document)
 ) {
