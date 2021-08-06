@@ -139,6 +139,15 @@ export default class Semver {
     }
 
     /**
+     * Return a string representation of a semver-version on JSON.stringify
+     *
+     * @returns {String}
+     */
+    toJson() {
+        return this.toString();
+    }
+
+    /**
      * Compare versions
      *
      * @param {Semver} version
