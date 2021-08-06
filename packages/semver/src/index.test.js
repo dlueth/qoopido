@@ -49,6 +49,17 @@ describe("toString()", () => {
     });
 });
 
+describe("toJson()", () => {
+    test("should return the correct string representation", () => {
+        expect(new Semver("2.0.0").toJson()).toBe("2.0.0");
+        expect(new Semver("2.0.0-rc.1").toJson()).toBe("2.0.0-rc.1");
+        expect(new Semver("1.0.0-beta").toJson()).toBe("1.0.0-beta");
+        expect(new Semver("1.2.3-beta.1+build345").toJson()).toBe(
+            "1.2.3-beta.1+build345"
+        );
+    });
+});
+
 describe("compare()", () => {
     test("should throw `TypeError` on invalid versions", () => {
         const version = new Semver("1.0.0");
